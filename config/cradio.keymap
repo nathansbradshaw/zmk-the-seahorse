@@ -34,6 +34,27 @@
 	;
 };
 
+&kscan1 {
+    input-gpios 	= <&pro_micro  2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 16 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	, <&pro_micro  1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+	;
+};
+
 / {
     behaviors {
         ht: hold_tap {
@@ -70,7 +91,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 1 BSPC
+                                            &lt 2 TAB   &kp SPACE     &kp ENTER  &lt 1 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
