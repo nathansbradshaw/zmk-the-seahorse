@@ -1,13 +1,4 @@
-/* Adjusted Cradio pin arrangement */
-/* To match those required for the roadrunner */
 
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
-#include "cradio.dtsi"
 &kscan0 {
 	input-gpios
 	= <&pro_micro  1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
