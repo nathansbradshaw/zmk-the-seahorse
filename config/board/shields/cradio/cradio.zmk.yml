@@ -1,12 +1,12 @@
 file_format: "1"
-id: roadrunner
+id: cradio
 name: RoadRunner
 type: shield
-url: https://github.com/nathansbradshaw/zmk-roadrunner
+url: https://github.com/nathansbradshaw/zmk-cradio
 requires: [pro_micro]
 exposes: [i2c_oled]
 features:
   - keys
 siblings:
-  - roadrunner_left
-  - roadrunner_right
+  - cradio_left
+  - cradio_right

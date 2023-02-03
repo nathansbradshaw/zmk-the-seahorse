@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include "roadrunner.dtsi"
+#include "cradio.dtsi"
 
 &kscan0 {
     input-gpios
