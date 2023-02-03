@@ -9,31 +9,6 @@
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
 #define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
 
-
-/* Adjusted roadrunner pin arrangement */
-/* To match those required for the roadrunner */
-// &kscan0 {
-// 	input-gpios
-// 	= <&pro_micro  2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 16 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	, <&pro_micro  1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-// 	;
-// };
-
 / {
     behaviors {
         ht: hold_tap {
@@ -127,77 +102,3 @@
         };
     };
 };
-
-
-
-// Default key map
-//   keymap {
-//         compatible = "zmk,keymap";
-//         default_layer {
-//             bindings = <
-//         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-//         //│  Q       │  W       │  E       │  R       │  T       │   │  Y       │  U       │  I       │  O       │  P       │
-//             &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│  A       │  S       │  D       │  F       │  G       │   │  H       │  J       │  K       │  L       │ ' "      │
-//             HRML(A,        S,         D,         F)     &kp G          &kp H      HRMR(J,        K,         L,        SQT)
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
-//             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-//         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-//                                             &lt 2 TAB   &kp SPACE     &kp ENTER  &lt 1 BSPC
-//         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-//             >;
-//         };
-
-//         right_layer {
-//             bindings = <
-//         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-//         //│ INSERT   │  1       │  2       │  3       │          │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
-//             &kp INS    &kp N1     &kp N2     &kp N3     &trans         &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│ DELETE   │  4       │  5       │  6       │          │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
-//             &kp DEL    &kp N4     &kp N5     &kp N6     &trans         &kp LARW   &kp DARW   &kp UARW   &kp RARW   &kp SEMI
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│ CAPS     │  7       │  8       │  9       │  0       │   │          │          │          │          │          │
-//            &caps_word  &kp N7     &kp N8     &kp N9     &kp N0         &trans     &trans     &trans     &trans     &trans
-//         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-//                                              &trans     &kp ESC        &trans     &trans
-//         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-//             >;
-//         };
-
-//         left_layer {
-//             bindings = <
-//         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-//         //│          │  [       │  {       │  }       │          │   │  ^       │  (       │  )       │  ]       │  ~       │
-//             &trans     &kp LBKT   &kp LBRC   &kp RBRC   &trans         &kp CARET  &kp LPAR   &kp RPAR   &kp RBKT   &kp TILDE
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│  !       │  @       │  #       │  $       │  %       │   │  *       │  -       │  =       │  \       │  `       │
-//             &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp ASTRK  &kp MINUS  &kp EQUAL  &kp BSLH   &kp GRAVE
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│          │          │          │          │          │   │  &       │  _       │  +       │  │       │          │
-//             &trans     &trans     &trans     &trans     &trans         &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &trans
-//         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-//                                              &trans     &trans         &trans     &trans
-//         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-//             >;
-//         };
-
-//         tri_layer {
-//             bindings = <
-//         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-//         //│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │  RESET   │
-//             &reset     &trans     &trans     &trans    &bt BT_SEL 0    &trans     &trans     &trans     &trans      &reset
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
-//           &bootloader  &trans     &trans     &trans    &bt BT_SEL 1    &trans     &trans     &trans     &trans    &bootloader
-//         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//         //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
-//             &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &trans     &trans     &trans     &trans     &trans
-//         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-//                                              &trans     &trans         &trans     &trans
-//         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-//             >;
-//         };
-//     };
