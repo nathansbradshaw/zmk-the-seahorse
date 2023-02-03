@@ -1,8 +1,8 @@
 file_format: "1"
-id: cradio
-name: Cradio/Sweep
+id: roadrunner
+name: RoadRunner
 type: shield
-url: https://github.com/davidphilipbarr/Sweep
+url: https://github.com/nathansbradshaw/zmk-roadrunner
 requires: [pro_micro]
 exposes: [i2c_oled]
 features:
