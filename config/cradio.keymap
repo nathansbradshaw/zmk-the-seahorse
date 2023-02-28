@@ -54,11 +54,11 @@
         right_layer {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│   1 !    │   2 @    │   3 #    │   4 $    │   5 %    │   │   6 ^    │   7 &    │   8 *    │   9 (    │  0 )     │
-           &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
+        //│   1 !    │   2 @    │  UP      │   4 $    │   5 %    │   │   6 ^    │   7 &    │   8 *    │   9 (    │  0 )     │
+           &kp N1     &kp N2       UP,         &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ ESC      │  LEFT    │ UP       │ DOWN,    │   RIGHT  │   │          │   ' "    │  [ {     │   ] }    │    ; :   │
-           &kp ESC     HRML(LEFT, UP,        DOWN,        RIGHT)         &none   HRMR(APOS,   LBKT,      RBKT,    SEMICOLON)
+        //│ ESC      │  LEFT    │ DOWN     │  RIGHT   │          │   │          │   ' "    │  [ {     │   ] }    │    ; :   │
+           &kp ESC     HRML(LEFT, DOWN,       RIGHT,)                    &none   HRMR(APOS,   LBKT,      RBKT,    SEMICOLON)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │          │    ` ~   │    - _   │    = +   │   \ |    │
            &none      &none      &none      &none      &none          &none      &kp GRAVE  &kp MINUS  &kp EQUAL  &kp BSLH
