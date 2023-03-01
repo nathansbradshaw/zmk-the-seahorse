@@ -6,7 +6,7 @@
 #include <dt-bindings/zmk/bt.h>
 
 // Home row mods macro
-#define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LCTRL k2  &ht LALT k3  &ht LGUI k4
+#define HRML(k1,k2,k3,k4) &ht LSHFT k2  &ht LCTRL k1  &ht LALT k4  &ht LGUI k3
 #define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RALT k2  &ht RCTRL k3  &ht RSHFT k4
 #define HYPER(k1) &ht LS(LC(LA(LGUI))) k1
 
@@ -44,9 +44,9 @@
              &kp A    &kp S     &kp D      &kp F       &kp G          &kp H      &kp J      &kp K    &kp L    &kp SEMICOLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
-           HRML(Z,      X,         C,         V)        &kp B          &kp N      HRMR(M,     COMMA,    DOT,        FSLH)
+             &lt1 Z     &kp X      &kp C    &kp V      &kp B          &kp N      &kp M     &kp COMMA    &kp DOT  &lt2 FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB    &lt 1 SPACE   &lt 1 ENTER &lt 2 BSPC
+                                            HRML(ENTER,    SPACE,        TAB,         BSPC)
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -78,7 +78,7 @@
             &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ CLEAR BT │  BT NEXT │          │          │          │   │          │          │          │          │          │
-           &bt BT_CLR &bt BT_NXT &none      &none      &none          &none      &none      &none      &kp F11      &kp F12
+           &bt BT_CLR &bt BT_NXT &none      &none      &none          &none      &kp F11      &kp F12    &kp N0     &kp F12
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                             &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
