@@ -9,8 +9,8 @@
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LCTRL k2  &ht LALT k3  &ht LGUI k4
 #define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RALT k2  &ht RCTRL k3  &ht RSHFT k4
 #define HYPER(k1) &ht LS(LC(LA(LGUI))) k1
-#define LSHIFT(k1) &ht LSHFT k1
-#define LCTRL(k1) &ht LCTRL k1
+#define SHIFT(k1) &ht LSHFT k1
+#define CTRL(k1) &ht LCTRL k1
 
 / {
     behaviors {
@@ -48,7 +48,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 1 TAB  LSHIFT(SPACE)  LCRT(ENTER) &lt 2 BSPC
+                                            &lt 1 TAB  SHIFT(SPACE)   CRT(ENTER) &lt 2 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
