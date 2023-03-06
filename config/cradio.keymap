@@ -42,8 +42,8 @@
         //│  Q       │  W       │  E       │  R       │  T       │   │  Y       │  U       │  I       │  O       │  P       │
            HYPER(Q)   &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  A       │  S       │  D       │  F       │  G       │   │  H       │  J       │  K       │  L       │     ; :  │
-           HRML(A,      S,         D,         F)       &kp G          &kp H      HRMR(J,      K,         L,       SEMICOLON)
+        //│  A       │  S       │  D       │  F       │  G       │   │  H       │ J       │  K       │  L       │     ; :  │
+           &kp A      &kp S         &kp D         &kp F       &kp G          &kp H      &kp J      &kp K         &kp L       &kp SEMICOLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
@@ -61,7 +61,7 @@
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ LEFT     │  DOWN    │ UP       │ RIGHT    │   ESC    │   │          │   ' "    │  [ {     │   ] }    │    ; :   │
         
-           &kp ESC    &kp LEFT   &kp UP   &kp DOWN    &kp RIGHT       &none   HRMR(APOS,    LBKT,       RBKT,    SEMICOLON)
+           &kp ESC    &kp LEFT   &kp UP   &kp DOWN    &kp RIGHT       &none   &kp APOS    &kp LBKT       &kp RBKT    &kp SEMICOLON)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │          │    ` ~   │    - _   │    = +   │   \ |    │
            &none      &none      &none      &none      &none          &none      &kp GRAVE  &kp MINUS  &kp EQUAL  &kp BSLH
