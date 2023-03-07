@@ -48,7 +48,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt1 TAB  SHIFT(SPACE)   CRTL(ENTER) &lt2 BSPC
+                                            &lt 1 TAB  SHIFT(SPACE)   CTRL(ENTER) &lt 2 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -64,7 +64,7 @@
            &kp ESC    &kp LEFT   &kp UP   &kp DOWN    &kp RIGHT       &none   &kp APOS    &kp LBKT       &kp RBKT    &kp SEMICOLON)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │          │    ` ~   │    - _   │    = +   │   \ |    │
-           &none      &none      &none      &none      &none          &none      &kp GRAVE  &kp MINUS  &kp EQUAL  &kp BSLH
+           &none      &kp LEFT    &kp DOWN &kp RIGHT      &none          &none      &kp GRAVE  &kp MINUS  &kp EQUAL  &kp BSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                             &trans     &kp LSHIFT     &kp RGUI      &kp RALT
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
