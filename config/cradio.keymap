@@ -61,7 +61,7 @@
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ LEFT     │  DOWN    │ UP       │ RIGHT    │   ESC    │   │          │   ' "    │  [ {     │   ] }    │    ; :   │
         
-           &kp ESC    &kp LEFT   &kp UP   &kp DOWN    &kp RIGHT       &none   &kp APOS    &kp LBKT       &kp RBKT    &kp SEMICOLON)
+           &kp ESC    &kp LEFT   &kp UP   &kp DOWN    &kp RIGHT       &none   &kp APOS    &kp LBKT       &kp RBKT    &kp SEMICOLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │          │    ` ~   │    - _   │    = +   │   \ |    │
            &none      &kp LEFT    &kp DOWN &kp RIGHT      &none          &none      &kp GRAVE  &kp MINUS  &kp EQUAL  &kp BSLH
