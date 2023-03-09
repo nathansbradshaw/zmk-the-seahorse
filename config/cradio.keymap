@@ -83,7 +83,7 @@
         //│ CLEAR BT │  BT NEXT │          │          │          │   │          │          │          │          │          │
            &bt BT_CLR &bt BT_NXT &none      &none      &none          &none      &none      &none      &kp F11    &kp F12
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &trans     &trans         &trans     &trans
+                                            &kp LALT    &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
