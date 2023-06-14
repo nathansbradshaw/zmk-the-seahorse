@@ -56,7 +56,7 @@
         //│ HOME     │ UP       │  END     │ PAGE UP  │ DEL      │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
             &kp HOME   &kp UP     &kp END   &kp PG_UP  &kp DEL          &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ LEFT     │  DOWN    │ RIHT     │ PAGE DOWN│ ESC      │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
+        //│ LEFT     │  DOWN    │ RIGHT    │ PAGE DOWN│ ESC      │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
            &kp LEFT   &kp DOWN   &kp RIGHT  &kp PG_DN  &kp ESC         &kp LARW   &kp DARW   &kp UARW   &kp RARW   &kp SEMI
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ CAPS     │ PRINT SC │volume up │volume dwn│  Next    │   │ PREV SONG│    -     │     +    │   `      │   ~      │
