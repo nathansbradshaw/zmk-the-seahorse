@@ -1,10 +1,4 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
-#include "cradio.dtsi"
+#include "seahorse_v1.dtsi"
 
 &kscan0 {
     input-gpios

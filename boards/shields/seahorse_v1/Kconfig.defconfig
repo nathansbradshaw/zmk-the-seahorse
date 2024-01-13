@@ -1,0 +1,17 @@
+
+if SHIELD_SEAHORSE_V1_LEFT
+
+config ZMK_KEYBOARD_NAME
+	default "Seahorse v1.0"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+	default y
+
+endif
+
+if SHIELD_SEAHORSE_V1_LEFT || SHIELD_SEAHORSE_V1_RIGHT
+
+config ZMK_SPLIT
+	default y
+
+endif
