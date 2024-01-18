@@ -1,0 +1,2 @@
+/* Source the main keymap */
+#include "./boards/shields/seahorse_v2.keymap"
