@@ -1,4 +1,4 @@
-#include "seahorse_v1.dtsi"
+#include "seahorse_v2.dtsi"
 
 &default_transform {
 	col-offset = <17>;

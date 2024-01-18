@@ -1,0 +1,19 @@
+
+if SHIELD_SEAHORSE_V2_LEFT
+
+config ZMK_KEYBOARD_NAME
+	default "Seahorse v2.0.0"
+
+# The side with the PS2 Mouse / TP has to be the central half
+
+config ZMK_SPLIT_ROLE_CENTRAL
+	default y
+
+endif
+
+if SHIELD_SEAHORSE_V2_LEFT || SHIELD_SEAHORSE_V2_RIGHT
+
+config ZMK_SPLIT
+	default y
+
+endif

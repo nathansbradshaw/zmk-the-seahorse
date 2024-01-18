@@ -1,5 +1,0 @@
-config SHIELD_SEAHORSE_V1_LEFT
-	def_bool $(shields_list_contains,seahorse_v1_left)
-
-config SHIELD_SEAHORSE_V1_RIGHT
-	def_bool $(shields_list_contains,seahorse_v1_right)

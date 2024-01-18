@@ -2,6 +2,8 @@
 Firmware for the sea horse pcb based on the Ferris Sweep
 The board can be found here: https://github.com/nathansbradshaw/the-seahorse
 
+V2 has a trackpoint and therefore needs special setup if building locally
+
 # Flashing
 See [Flashing Guide](https://zmk.dev/docs/development/build-flash)
 ## Local

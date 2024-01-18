@@ -1,11 +1,11 @@
 file_format: "1"
-id: seahorse_v1
-name: seahorse_v1
+id: seahorse_v2
+name: seahorse_v2
 type: shield
 url: https://github.com/nathansbradshaw/the-seahorse
 requires: [pro_micro]
 features:
   - keys
 siblings:
-  - seahorse_v1_left
-  - seahorse_v1_right
+  - seahorse_v2_left
+  - seahorse_v2_right
