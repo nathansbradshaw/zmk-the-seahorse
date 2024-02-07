@@ -31,6 +31,11 @@
         };
     };
 
+    &lt {
+        quick-tap-ms = <180>;
+        global-quick-tap;
+    }
+
     keymap {
         compatible = "zmk,keymap";
         default_layer {
@@ -45,7 +50,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &ht 2 TAB   &kp SPACE     &kp ENTER  &ht 1 BSPC
+                                            &lt 2 TAB   &kp SPACE     &kp ENTER  &lt 1 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
