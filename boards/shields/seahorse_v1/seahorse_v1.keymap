@@ -9,15 +9,20 @@
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
 #define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
 
+&lt {
+    quick-tap-ms = <180>;
+    global-quick-tap;
+};
+
 / {
     behaviors {
         ht: hold_tap {
             label = "hold_tap";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <220>;
-            quick-tap-ms = <150>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <180>;
             global-quick-tap;
             bindings = <&kp>, <&kp>;
         };
