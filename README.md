@@ -18,3 +18,7 @@ west build --pristine -b nice_nano_v2 -- -DSHIELD=blaster_pad -DZMK_EXTRA_MODULE
 the above command generates a file in `zmk/app/build/zephyr/zmk.uf2`
 ## Github
 fork this repo
+
+## TRACKPOINT
+red trackpoint
+[Red Track point pinout](Red_Track_Point.png)
