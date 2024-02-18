@@ -1,5 +1,15 @@
 #include "seahorse_v2.dtsi"
 
 &default_transform {
-	col-offset = <17>;
+	col-offset = <5>;
+};
+
+&kscan0 {
+        col-gpios
+            = <&pro_micro 16 GPIO_ACTIVE_HIGH> // col 0
+            , <&pro_micro 10 GPIO_ACTIVE_HIGH> // col 1
+            , <&pro_micro 14 GPIO_ACTIVE_HIGH> // col 2
+            , <&pro_micro 15 GPIO_ACTIVE_HIGH> // col 3
+            , <&pro_micro 18 GPIO_ACTIVE_HIGH> // col 4
+            ;
 };
