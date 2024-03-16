@@ -1,5 +1,6 @@
 #ifdef HAS_MOUSE_TP
   #include <dt-bindings/zmk/mouse_settings.h>
+  #include <behaviors/mouse_setting.dtsi>
 
  /*
   * Key Behaviors to adjust settings
@@ -111,7 +112,7 @@
     // impact). Alternatively consider achieving the same effect using the
     //  `zmk,input-configs` feature.
     // tp-xy-swap;
-    // tp-x-invert;
+    tp-x-invert;
     // tp-y-invert;
 
   };
@@ -120,10 +121,11 @@
   * Input Config
   */
 
-  &mouse_ps2_config {
+  &mouse_ps2_input_listener {
     xy-swap;
     x-invert;
     y-invert;
+    tp-x-invert;
 
     // Set the layer that should automatically activate when the mouse is
     // moving.
