@@ -4,4 +4,4 @@
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
 /* source the main keymap */
-#include "../boards/shields/seahorse_v2.keymap"
+#include "./boards/shields/seahorse_v2.keymap"
