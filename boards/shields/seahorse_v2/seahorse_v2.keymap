@@ -1,8 +1,5 @@
 // Copyright (c) 2022 The ZMK Contributors
 // SPDX-License-Identifier: MIT
-#define HAS_UROB
-#define HAS_MOUSE_KEYS
-#define HAS_MOUSE_TP
 
 #define MOUSE_KEYS 11
 #define MOUSE_TP 12
