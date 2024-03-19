@@ -10,10 +10,10 @@
 
 
 #ifdef HAS_MOUSE_KEYS
-    #include "includes/mouse_keys.dtsi"
+    #include "./includes/mouse_keys.dtsi"
 #endif
 
 #ifdef HAS_MOUSE_TP
-    #include "includes/mouse_tp.dsti"
+    #include "./includes/mouse_tp.dsti"
 #endif
 
