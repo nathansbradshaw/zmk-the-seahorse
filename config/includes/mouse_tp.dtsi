@@ -125,7 +125,6 @@
     xy-swap;
     x-invert;
     y-invert;
-    tp-x-invert;
 
     // Set the layer that should automatically activate when the mouse is
     // moving.
