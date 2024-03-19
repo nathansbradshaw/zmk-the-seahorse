@@ -3,5 +3,17 @@
 #define HAS_UROB
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
-/* source the main keymap */
-#include "boards/shields/seahorse_v2.keymap"
+
+#define MOUSE_KEYS 11
+#define MOUSE_TP 12
+#define MOUSE_SET 13
+
+
+#ifdef HAS_MOUSE_KEYS
+    #include "includes/mouse_keys.dtsi"
+#endif
+
+#ifdef HAS_MOUSE_TP
+    #include "includes/mouse_tp.dsti"
+#endif
+
