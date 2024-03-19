@@ -14,6 +14,6 @@
 #endif
 
 #ifdef HAS_MOUSE_TP
-    #include "./includes/mouse_tp.dsti"
+    #include "./includes/mouse_tp.dtsi"
 #endif
 
