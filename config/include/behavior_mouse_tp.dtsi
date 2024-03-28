@@ -121,7 +121,6 @@
  */
 
 &mouse_ps2_input_listener {
-  xy-swap;
   x-invert;
   y-invert;
 
