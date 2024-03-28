@@ -1,3 +1,9 @@
+#include <behaviors.dtsi>
+
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/mouse.h>
 
 /* Enable keymap features that require forks */
 #define HAS_UROB
@@ -10,19 +16,12 @@
 
 
 #ifdef HAS_MOUSE_KEYS
-    #include "includes/mouse_keys.dtsi"
+ #include "include/behavior_mouse_keys.dtsi"
 #endif
 
 #ifdef HAS_MOUSE_TP
-    #include "includes/mouse_tp.dtsi"
+    #include "include/behavior_mouse_tp.dtsi"
 #endif
-
-// Copyright (c) 2022 The ZMK Contributors
-// SPDX-License-Identifier: MIT
-
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
 
 // Home row mods macro
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
