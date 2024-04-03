@@ -10,9 +10,11 @@
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
 
-#define MOUSE_KEYS 11
-#define MOUSE_TP 12
-#define MOUSE_SET 13
+#define DEFAULT 0
+#define RIGHT 1
+#define LEFT 2
+#define MOUSE_TP 4
+#define MOUSE_KEYS 5 // TODO
 
 
 #ifdef HAS_MOUSE_KEYS
@@ -55,7 +57,7 @@
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│  Q       │  W       │  E       │  R       │  T       │   │  Y       │  U       │  I       │  O       │  P       │
-            &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &lt 4 P
+            &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O   &lt MOUSE_TP P
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  A       │  S       │  D       │  F       │  G       │   │  H       │  J       │  K       │  L       │ ' "      │
             HRML(A,        S,         D,         F)     &kp G          &kp H      HRMR(J,        K,         L,        SQT)
@@ -63,7 +65,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp SPACE     &kp ENTER  &lt 1 BSPC
+                                            &lt LEFT TAB   &kp SPACE     &kp ENTER  &lt RIGHT BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -97,7 +99,7 @@
         //│  esc     │          │  _       │    =     │  del     │   │  [       │   ]      │  <       │  >       │         │
            &kp ESC     &kp BSLH  &kp UNDER &kp EQUAL   &kp DEL       &kp LBKT    &kp RBKT   &kp LT     &kp GT     &kp PIPE  
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &trans    &lt 4 SPACE      &trans     &trans
+                                             &trans &lt MOUSE_TP SPACE      &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -119,7 +121,7 @@
             >;
         };
 
-        mouse_layer {
+        MouseTP_layer {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │   │          │          │          │          │          │
@@ -129,7 +131,7 @@
             &trans     &trans     &trans     &trans    &trans          &mkp MB4   &mkp RCLK  &mkp LCLK  &mkp MCLK   &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │  MB5     │ SCR_UP   │ SCR_DWN  │          │          │
-            &trans     &trans     &trans     &trans      &trans        &mkp MB5   &trans     &trans     &trans     &trans
+            &trans     &trans     &trans     &trans      &trans        &mkp MB5 &msc SCRL_UP &msc SCRL_DOWN  &trans  &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                             &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
