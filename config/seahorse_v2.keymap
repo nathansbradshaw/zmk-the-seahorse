@@ -28,6 +28,7 @@
 // Home row mods macro
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
 #define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
+#define HYPER(k1) &ht LS(LC(LA(LGUI))) k1
 
 / {
     behaviors {
@@ -35,9 +36,9 @@
             label = "hold_tap";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <220>;
-            quick-tap-ms = <150>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <180>;
             global-quick-tap;
             bindings = <&kp>, <&kp>;
         };
@@ -57,7 +58,7 @@
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│  Q       │  W       │  E       │  R       │  T       │   │  Y       │  U       │  I       │  O       │  P       │
-        &bt BT_CLR      &sys_reset      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &sys_reset    &bt BT_CLR
+            HYPER(Q)      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O   HYPER(P)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  A       │  S       │  D       │  F       │  G       │   │  H       │  J       │  K       │  L       │ ' "      │
             HRML(A,        S,         D,         F)     &kp G          &kp H      HRMR(J,        K,         L,        SQT)
@@ -107,14 +108,14 @@
         tri_layer {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │  RESET   │
-            &sys_reset  &trans     &trans     &trans    &bt BT_SEL 0    &trans     &trans     &trans     &trans    &sys_reset
+        //│ RESET    │          │          │ PROFILE  │PROFILE 0 │   │   F1     │   F2     │   F3     │   F4     │   F5     │
+            &sys_reset  &trans     &trans  &bt BT_SEL 3 &bt BT_SEL 0   &kp F1    &kp F2     &kp F3     &kp F4    &kp F5
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
-          &bootloader  &trans     &trans     &trans    &bt BT_SEL 1    &trans     &trans     &trans     &trans    &bootloader
+        //│BOOTLOADER│          │          │          │PROFILE 1 │   │   F6     │   F7     │   F8     │   F9     │   F10    │
+          &bootloader  &trans     &trans     &trans    &bt BT_SEL 1    &kp F6    &kp F7     &kp F8     &kp F9    &kp F10
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │ CLEAR BT │PROFILE 2 │   │          │          │          │          │          │
-            &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &trans     &trans     &trans     &trans     &trans
+        //│          │          │          │ CLEAR BT │PROFILE 2 │   │   F11    │   F12    │   F13       │   PAUSE  │  PRINT   │
+            &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &kp F11   &kp F12    &kp F13  &kp PAUSE_BREAK &kp PSCRN
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
