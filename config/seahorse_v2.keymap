@@ -127,8 +127,8 @@
         //│          │          │          │          │          │   │          │          │          │          │          │
             &trans     &trans     &trans     &trans    &trans          &trans     &trans     &trans     &trans     &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │          │          │   │   MB4    │ RGHT_Clk │ LFT_CLK  │ MDL_CLK  │          │
-            &trans     &trans     &trans     &trans    &trans          &mkp MB4   &mkp RCLK  &mkp LCLK  &mkp MCLK   &trans
+        //│          │          │          │          │          │   │   MB4    │  LFT_CLK │ RGHT_CLK │ MDL_CLK  │          │
+            &trans     &trans     &trans     &trans    &trans          &mkp MB4   &mkp LCLK  &mkp RCLK  &mkp MCLK   &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │  MB5     │ SCR_UP   │ SCR_DWN  │          │          │
             &trans     &trans     &trans     &trans      &trans        &mkp MB5 &msc SCRL_UP &msc SCRL_DOWN  &trans  &trans
