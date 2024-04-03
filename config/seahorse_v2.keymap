@@ -12,7 +12,7 @@
 
 #define DEFAULT 0
 #define L_RIGHT 1
-#define L_LEFT_LAYER 2
+#define L_LEFT 2
 #define MOUSE_TP 4
 #define MOUSE_KEYS 5 // TODO
 
