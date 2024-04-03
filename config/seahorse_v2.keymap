@@ -98,7 +98,7 @@
             HRML(N1,    N2,       N3,        N4)        &kp N5         &kp N6     HRMR(N7,   N8,        N9,         N0)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  esc     │          │  _       │    =     │  del     │   │  [       │   ]      │  <       │  >       │         │
-           &kp ESC     &kp BSLH  &kp UNDER &kp EQUAL   &kp DEL       &kp LBKT    &kp RBKT   &kp LT     &kp GT     &kp PIPE  
+&lt MOUSE_TP ESC     &kp BSLH  &kp UNDER &kp EQUAL   &kp DEL       &kp LBKT    &kp RBKT   &kp LT     &kp GT     &kp PIPE  
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans &lt MOUSE_TP SPACE      &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
