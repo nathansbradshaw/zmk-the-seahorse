@@ -66,8 +66,8 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                        &lt L_LEFT TAB &kp SPACE      &kp ENTER  &lt L_RIGHT BSPC
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+                                &lt L_LEFT TAB  &lt MOUSE_TP SPACE    &kp ENTER  &lt L_RIGHT BSPC
+        //                     ╰──────────────┴──────────────────╯   ╰──────────┴────────────────╯
             >;
         };
 
@@ -92,7 +92,7 @@
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│    !     │  @       │  #       │  $       │ %        │   │  ^       │  &       │  *       │  (       │  )       │
-    &lt MOUSE_TP EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET   &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  
+            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET   &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│   1      │  2       │  3       │  4       │  5       │   │  6       │  7       │  8       │  9       │  0       │
             HRML(N1,    N2,       N3,        N4)        &kp N5         &kp N6     HRMR(N7,   N8,        N9,         N0)
