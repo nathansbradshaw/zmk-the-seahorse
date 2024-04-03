@@ -11,8 +11,8 @@
 #define HAS_MOUSE_TP
 
 #define DEFAULT 0
-#define RIGHT 1
-#define LEFT 2
+#define L_RIGHT 1
+#define L_LEFT_LAYER 2
 #define MOUSE_TP 4
 #define MOUSE_KEYS 5 // TODO
 
@@ -66,7 +66,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt LEFT TAB   &kp SPACE     &kp ENTER  &lt RIGHT BSPC
+                                        &lt L_LEFT TAB &kp SPACE      &kp ENTER  &lt L_RIGHT BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -126,13 +126,13 @@
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │   │          │          │          │          │          │
-            &trans     &trans     &trans     &trans    &trans          &trans     &trans     &trans     &trans     &trans
+            &trans   &mmv MOVE_UP &mkp LCLK  &mkp RCLK    &trans          &trans     &trans     &trans     &trans     &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │   MB4    │  LFT_CLK │ RGHT_CLK │ MDL_CLK  │          │
-            &trans     &trans     &trans     &trans    &trans          &mkp MB4   &mkp LCLK  &mkp RCLK  &mkp MCLK   &trans
+    &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans &trans    &mkp MB4   &mkp LCLK  &mkp RCLK  &mkp MCLK   &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │  MB5     │ SCR_UP   │ SCR_DWN  │          │          │
-            &trans     &trans     &trans     &trans      &trans        &mkp MB5 &msc SCRL_UP &msc SCRL_DOWN  &trans  &trans
+            &trans     &trans  &msc SCRL_UP  &msc SCRL_DOWN  &trans        &mkp MB5 &msc SCRL_UP &msc SCRL_DOWN  &trans  &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                             &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
