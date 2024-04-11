@@ -98,7 +98,7 @@
 
 
   // The maximum mouse movement speed the TP will accelarate to (Default: 97)
-  tp-val6-upper-speed = <192>;
+  tp-val6-upper-speed = <255>;
 
 
   // Not quite sure what it does tbh :) (Default: 6)
