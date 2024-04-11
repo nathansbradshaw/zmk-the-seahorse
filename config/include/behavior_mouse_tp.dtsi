@@ -94,7 +94,7 @@
 
 
   // How sensitive the TP is (Default: 128)
-  tp-sensitivity = <160>;
+  tp-sensitivity = <132>;
 
 
   // The maximum mouse movement speed the TP will accelarate to (Default: 97)
@@ -102,7 +102,7 @@
 
 
   // Not quite sure what it does tbh :) (Default: 6)
-  tp-neg-inertia = <12>;
+  tp-neg-inertia = <7>;
 
 
   // Adjusts axis settings on the TP
