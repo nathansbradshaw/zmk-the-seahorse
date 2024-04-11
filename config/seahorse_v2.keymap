@@ -78,7 +78,7 @@
             &kp HOME   &kp UP     &kp END   &kp PG_UP  &kp DEL          &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ LEFT     │  DOWN    │ RIGHT    │ PAGE DOWN│ ESC      │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
-           &kp LEFT   &kp DOWN   &kp RIGHT  &kp PG_DN  &kp ESC         &kp LARW   &kp DARW   &kp UARW   &kp RARW   &kp SEMI
+           &kp LEFT   &kp DOWN   &kp RIGHT  &kp PG_DN  &kp ESC         &kp LARW   HRMR( DARW,  UARW,    RARW,      SEMI)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ CAPS     │ PRINT SC │volume up │volume dwn│  Next    │   │ PREV SONG│    -     │     +    │   `      │   ~      │
            &caps_word  &trans   &trans      &trans     &trans         &trans      &kp MINUS  &kp PLUS   &kp GRAVE  &kp TILDE
@@ -126,13 +126,13 @@
             bindings = <
         //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
         //│             │             │             │             │             │   │             │             │             │             │             │
-            &trans        &mmv MOVE_UP   &mkp LCLK    &mkp RCLK        &trans          &trans        &trans        &trans        &trans        &trans
+            &trans        &trans       &mkp LCLK    &mkp RCLK        &trans        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT  &trans
         //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
         //│             │             │             │             │             │   │   MB4       │  LFT_CLK    │ RGHT_CLK    │ MDL_CLK     │             │
-          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT  &trans     U_MSS_TP_S_I       &mkp MB4     &mkp LCLK     &mkp RCLK     &mkp MCLK      &trans
+            &trans        &trans        &trans        &trans        U_MSS_TP_S_I       &mkp MB4     &mkp LCLK     &mkp RCLK     &mkp MCLK      &trans
         //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-        //│             │             │             │             │             │   │     MB5     │    SCR_UP   │    SCR_DWN  │             │             │
-             &trans        &trans      &msc SCRL_UP  &msc SCRL_DOWN  U_MSS_TP_S_D      &mkp MB5     &msc SCRL_UP &msc SCRL_DOWN   &trans       &trans
+        //│             │             │             │             │             │   │     MB5     │    SCR_DWN   │    SCR_UP  │             │             │
+             &trans        &trans      &msc SCRL_UP  &msc SCRL_DOWN  U_MSS_TP_S_D      &mkp MB5     &msc SCRL_DWN &msc SCRL_UP   &trans       &trans
         //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                                           &trans     &trans              &trans     &trans
         //                                          ╰─────────────┴─────────────╯   ╰─────────────┴─────────────╯
