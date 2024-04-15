@@ -126,13 +126,13 @@
             bindings = <
         //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
         //│             │             │             │             │             │   │             │             │             │             │             │
-            &trans        &trans       &mkp LCLK    &mkp RCLK        &trans        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT  &trans
+            &trans        &msc SCRL_DOWN       &mkp LCLK    &mkp RCLK      &msc SCRL_UP        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT  &trans
         //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
         //│             │             │             │             │             │   │   MB4       │  LFT_CLK    │ RGHT_CLK    │ MDL_CLK     │             │
             &trans        &trans        &trans        &trans        U_MSS_TP_S_I       &mkp MB4     &mkp LCLK     &mkp RCLK     &mkp MCLK      &trans
         //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
         //│             │             │             │             │             │   │     MB5     │    SCR_DWN   │    SCR_UP  │             │             │
-             &trans        &trans      &msc SCRL_UP  &msc SCRL_DOWN  U_MSS_TP_S_D      &mkp MB5     &msc SCRL_DOWN &msc SCRL_UP   &trans       &trans
+             &trans        &trans      &trans         &trans      U_MSS_TP_S_D        &mkp MB5     &msc SCRL_DOWN &msc SCRL_UP   &trans       &trans
         //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                                           &trans     &trans              &trans     &trans
         //                                          ╰─────────────┴─────────────╯   ╰─────────────┴─────────────╯
