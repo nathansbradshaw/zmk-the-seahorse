@@ -94,7 +94,7 @@
 
 
   // How sensitive the TP is (Default: 128)
-  tp-sensitivity = <128>;
+  tp-sensitivity = <102>;
 
 
   // The maximum mouse movement speed the TP will accelarate to (Default: 97)
