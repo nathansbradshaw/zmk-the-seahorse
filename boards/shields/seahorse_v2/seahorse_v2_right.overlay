@@ -86,7 +86,7 @@
 //
 // You don't need this if you are not using a trackpoint or if you have a
 // trackpoint reset circuit.
- //
+//
 // It's ok to use a low-frequency pin for this.
 #define MOUSE_PS2_PIN_RST_PRO_MICRO <&pro_micro 20 GPIO_ACTIVE_HIGH>
 
