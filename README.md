@@ -4,6 +4,9 @@ The board can be found here: https://github.com/nathansbradshaw/the-seahorse
 
 V2 has a trackpoint and therefore needs special setup if building locally
 
+## Note:
+This is ZMK for V2, check the releases for v1 releases if you a re using the original Seahorse.
+
 # Flashing
 See [Flashing Guide](https://zmk.dev/docs/development/build-flash)
 ## Local
