@@ -1,18 +1,38 @@
 
+# Central Side Configuration
+#
+# The side on which the PS/2 mouse is connected MUST be the central side.
+#
+# By default zmk configures the LEFT side as the central side. But most people
+# want to connect their pointing devices to the RIGHT side.
+#
+# So, you need to define that the central side is the one to which the
+# pointing device is connected to.
+
 if SHIELD_SEAHORSE_V2_RIGHT
 
 	config ZMK_KEYBOARD_NAME
 		default "Seahorse v2.0.0"
 
-	# The side with the PS2 Mouse / TP has to be the central half
 	config ZMK_SPLIT_ROLE_CENTRAL
 		default y
 
 endif
 
+# Options that should be enabled on both sides
 if SHIELD_SEAHORSE_V2_LEFT || SHIELD_SEAHORSE_V2_RIGHT
 
 	config ZMK_SPLIT
 		default y
+
+	if ZMK_DISPLAY
+
+		config I2C
+			default y
+
+		config SSD1306
+			default y
+
+	endif # ZMK_DISPLAY
 
 endif

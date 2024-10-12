@@ -4,8 +4,10 @@ name: seahorse_v2
 type: shield
 url: https://github.com/nathansbradshaw/the-seahorse
 requires: [pro_micro]
+exposes: [i2c_oled]
 features:
   - keys
+  - display
 siblings:
   - seahorse_v2_left
   - seahorse_v2_right

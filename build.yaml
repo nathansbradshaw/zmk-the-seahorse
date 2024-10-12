@@ -6,15 +6,15 @@
 # distinguish build outputs from each other:
 #
 # board: [ "nice_nano_v2" ]
-# shield: [ "corne_left", "corne_right" ]
+# shield: [ "seahorse_v2_left", "seahorse_v2_right" ]
 # include:
 #   - board: bdn9_rev2
 #   - board: nice_nano_v2
 #     shield: reviung41
 #   - board: nice_nano_v2
-#     shield: corne_left
+#     shield: seahorse_v2_left
 #     cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
-#     artifact-name: corne_left_with_logging
+#     artifact-name: seahorse_v2_left_with_logging
 #
 ---
 include:
