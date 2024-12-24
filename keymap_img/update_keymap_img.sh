@@ -1,7 +1,9 @@
 #!/bin/sh
 
-echo 'Parsing ZMK keymap...'
-keymap -c keymap_config.yaml parse -z ../config/corne_tp.keymap > keymap.yaml
+echo 'Parsing ZMK keymap for Ferris Sweep...'
+keymap -c keymap_config.yaml parse -z ../config/seahorse_v2.keymap > keymap.yaml
 
-echo '\n\nDrawing keymap...'
-keymap -c keymap_config.yaml draw --qmk-keyboard crkbd/rev1 --qmk-layout LAYOUT_split_3x6_3 keymap.yaml > keymap.svg
+echo '\n\nDrawing keymap for Ferris Sweep...'
+keymap -c keymap_config.yaml draw --qmk-keyboard ferris/sweep --qmk-layout LAYOUT_ferris_sweep keymap.yaml > keymap.svg
+
+echo 'Keymap SVG for Ferris Sweep has been generated as keymap.svg'
