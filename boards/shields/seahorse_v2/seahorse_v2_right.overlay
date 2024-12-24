@@ -1,11 +1,18 @@
 /*
- * Copyright (c) 2020 Pete Johanson
- *
- * SPDX-License-Identifier: MIT
- */
+* Copyright (c) 2020 Pete Johanson
+*
+* SPDX-License-Identifier: MIT
+*/
 
- #include "seahorse_v2.dtsi"
-
+#include "seahorse_v2.dtsi"
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+// This define can be used in the keymap file to check whether the device tree
+// configs in this file are present to void build errors on the side that does
+// not have the mouse or TP
+#define MOUSE_PS2_DT_PRESENT
+    
  &default_transform {
      col-offset = <5>;
  };
@@ -407,16 +414,13 @@
          // zmk-config/config/includes/mouse_tp.dtsi
      };
  };
- #include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 / {
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
         input-processors = 
             <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>
-          , <&zip_temp_layer 7 50>
+        , <&zip_temp_layer 7 50>
             ;
         scroller {
             layers = <8>;
@@ -426,4 +430,3 @@
 
     
 };
- 
