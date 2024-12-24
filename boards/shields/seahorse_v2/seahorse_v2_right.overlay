@@ -334,7 +334,7 @@
  #ifdef MOUSE_PS2_DRIVER_UART
  
      &uart0 {
-        //  status = "disabled";
+         status = "disabled";
          compatible = "nordic,nrf-uarte";
  
          current-speed = MOUSE_PS2_UART_BAUD_RATE;
@@ -344,7 +344,7 @@
          pinctrl-names = "default", "sleep";
  
          uart_ps2: uart_ps2 {
-            //  status="disabled";
+             status="disabled";
              compatible = "uart-ps2";
              scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
              sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
