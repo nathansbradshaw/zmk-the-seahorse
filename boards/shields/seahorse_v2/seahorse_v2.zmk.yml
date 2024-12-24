@@ -8,7 +8,7 @@ exposes: [i2c_oled]
 features:
   - keys
   - display
-  # - pointer
+  - studio
 siblings:
   - seahorse_v2_left
   - seahorse_v2_right

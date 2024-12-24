@@ -5,71 +5,68 @@
 */
 
 #include "seahorse_v2.dtsi"
-#include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
-// This define can be used in the keymap file to check whether the device tree
-// configs in this file are present to void build errors on the side that does
-// not have the mouse or TP
-#define MOUSE_PS2_DT_PRESENT
+
     
- &default_transform {
-     col-offset = <5>;
- };
- 
- &kscan0 {
-         col-gpios
-             = <&pro_micro 16 GPIO_ACTIVE_HIGH> // col 0
-             , <&pro_micro 10 GPIO_ACTIVE_HIGH> // col 1
-             , <&pro_micro 14 GPIO_ACTIVE_HIGH> // col 2
-             , <&pro_micro 15 GPIO_ACTIVE_HIGH> // col 3
-             , <&pro_micro 18 GPIO_ACTIVE_HIGH> // col 4
-             ;
- };
- 
- 
- /*
-  * PS/2 Mouse / Trackpoint - User Configuration
-  *
-  * Enable PS/2 drivers on this side of the keyboard.
-  * It MUST be the central half. If you connected your TP or mouse to the
-  * left side, then move the following content to `your_keyboard_left.overlay`
-  *
-  * You also need to adjust `Kconfig.defconfig` and configure that this side
-  * is the central side.
-  *
-  */
- 
- 
- // Pick the PS/2 driver
- //
- // Comment out the following define to use the PS/2 GPIO driver instead of the
- // UART driver.
- //
- // Both, the UART and GPIO drivers, implement the PS/2 protocol and work with
- // trackpoints and other mouse devices that use PS/2.
- //
- // The only difference is which hardware they use on your controller to
- // transmit the data. The UART driver has MUCH better performance and should
- // be used by most people.
- //
- // The GPIO driver should only be used if your PS/2 pointing device uses a
- // clock frequency rate that is not compatible with the UART baud rates. Or
- // if you are NOT using a nrf52-based controller, such as the nice!nano,
- // nice!nano clone or a seeduino xiao.
- //
- // In all other cases you should try using the UART driver first.
- #define MOUSE_PS2_DRIVER_UART
- 
- 
- // Configure the SCL and SDA pins using the`&pro_micro` notation.
- //
- // If possible, try to choose the blue high frequency pins to avoid
- // bluetooth interference.
- //
- // It will still work even if you pick low frequency pins, but there is a risk
- // that the trackpoint could cause bluetooth interference.
- //
+    &default_transform {
+        col-offset = <5>;
+    };
+    
+    &kscan0 {
+        col-gpios
+        = <&pro_micro 16 GPIO_ACTIVE_HIGH> // col 0
+        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // col 1
+        , <&pro_micro 14 GPIO_ACTIVE_HIGH> // col 2
+        , <&pro_micro 15 GPIO_ACTIVE_HIGH> // col 3
+        , <&pro_micro 18 GPIO_ACTIVE_HIGH> // col 4
+        ;
+    };
+    
+    
+    /*
+    * PS/2 Mouse / Trackpoint - User Configuration
+    *
+    * Enable PS/2 drivers on this side of the keyboard.
+    * It MUST be the central half. If you connected your TP or mouse to the
+    * left side, then move the following content to `your_keyboard_left.overlay`
+    *
+    * You also need to adjust `Kconfig.defconfig` and configure that this side
+    * is the central side.
+    *
+    */
+    
+    #include <input/processors.dtsi>
+    #include <dt-bindings/zmk/input_transform.h>
+    #include <zephyr/dt-bindings/input/input-event-codes.h>
+
+    // Pick the PS/2 driver
+    //
+    // Comment out the following define to use the PS/2 GPIO driver instead of the
+    // UART driver.
+    //
+    // Both, the UART and GPIO drivers, implement the PS/2 protocol and work with
+    // trackpoints and other mouse devices that use PS/2.
+    //
+    // The only difference is which hardware they use on your controller to
+    // transmit the data. The UART driver has MUCH better performance and should
+    // be used by most people.
+    //
+    // The GPIO driver should only be used if your PS/2 pointing device uses a
+    // clock frequency rate that is not compatible with the UART baud rates. Or
+    // if you are NOT using a nrf52-based controller, such as the nice!nano,
+    // nice!nano clone or a seeduino xiao.
+    //
+    // In all other cases you should try using the UART driver first.
+    #define MOUSE_PS2_DRIVER_UART
+    
+    
+    // Configure the SCL and SDA pins using the`&pro_micro` notation.
+    //
+    // If possible, try to choose the blue high frequency pins to avoid
+    // bluetooth interference.
+    //
+    // It will still work even if you pick low frequency pins, but there is a risk
+    // that the trackpoint could cause bluetooth interference.
+    //
  // On the nice!nano documentation these are green DX pins:
  // https://nicekeyboards.com/docs/nice-nano/pinout-schematic
  //
@@ -291,25 +288,7 @@
   *          doing.
   */
  
- 
- // Firmware with alternative pins
- //
- // This can safely be removed. It's only used in the example zmk-config repo
- // to create an additional firmware with alternative PIN assignments.
- //
- // You can leave it or remove in your own zmk config. If you remove it, you
- // should also remove the entry in `zmk-config-example/build.yaml` that uses
- // it.
- #ifdef MOUSE_PS2_ALT_PINS
-     #undef MOUSE_PS2_PIN_SCL_PRO_MICRO
-     #undef MOUSE_PS2_PIN_SDA_PRO_MICRO
-     #undef MOUSE_PS2_PIN_SDA_PINCTRL
- 
-     #define MOUSE_PS2_PIN_SCL_PRO_MICRO <&pro_micro 1 GPIO_ACTIVE_HIGH>
-     #define MOUSE_PS2_PIN_SDA_PRO_MICRO <&pro_micro 0 GPIO_ACTIVE_HIGH>
-     #define MOUSE_PS2_PIN_SDA_PINCTRL <NRF_PSEL(UART_RX, 0, 8)>
- #endif
- 
+
  // This define can be used in the keymap file to check whether the device tree
  // configs in this file are present to void build errors on the side that does
  // not have the mouse or TP
@@ -355,7 +334,7 @@
  #ifdef MOUSE_PS2_DRIVER_UART
  
      &uart0 {
-         status = "disabled";
+        //  status = "disabled";
          compatible = "nordic,nrf-uarte";
  
          current-speed = MOUSE_PS2_UART_BAUD_RATE;
@@ -365,7 +344,7 @@
          pinctrl-names = "default", "sleep";
  
          uart_ps2: uart_ps2 {
-             status="disabled";
+            //  status="disabled";
              compatible = "uart-ps2";
              scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
              sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
@@ -389,7 +368,7 @@
  
  / {
      mouse_ps2: mouse_ps2 {
-         status = "disabled";
+        //  status = "disabled";
          compatible = "zmk,input-mouse-ps2";
  
  #ifdef MOUSE_PS2_DRIVER_UART
@@ -420,7 +399,7 @@
         device = <&mouse_ps2>;
         input-processors = 
             <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>
-        , <&zip_temp_layer 7 50>
+            , <&zip_temp_layer 7 50>
             ;
         scroller {
             layers = <8>;
