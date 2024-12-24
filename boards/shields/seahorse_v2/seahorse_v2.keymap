@@ -33,7 +33,7 @@
     tpoint0_mmv_il {
         compatible = "zmk,input-listener";
         device = <&tpoint0>;
-        input-processors = <&xy_transf (INPUT_TRANSFORM_Y_INVERT)>;
+        // input-processors = <&xy_transf (INPUT_TRANSFORM_Y_INVERT)>;
         // precise {
         //         layers = <NUM>;
         //         inherit;
