@@ -7,7 +7,7 @@
 #include "seahorse_v2.dtsi"
 
     
-    &default_transform {
+    &default_transform0 {
         col-offset = <5>;
     };
     
