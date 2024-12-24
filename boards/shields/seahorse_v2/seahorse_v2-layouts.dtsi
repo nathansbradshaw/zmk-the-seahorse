@@ -1,7 +1,7 @@
 #include <physical_layouts.dtsi>
 /{
 
-	default_transform: keymap_transform_0 {
+	default_transform0: keymap_transform0 {
 		compatible = "zmk,matrix-transform";
 		columns = <10>;
 		rows = <4>; 
