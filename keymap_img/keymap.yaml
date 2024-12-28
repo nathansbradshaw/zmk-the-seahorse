@@ -1,0 +1,176 @@
+layers:
+  Base:
+  - {t: Q, h: Meh+ ⌘}
+  - W
+  - E
+  - R
+  - T
+  - Y
+  - U
+  - I
+  - O
+  - {t: P, h: Meh+ ⌘}
+  - {t: A, h: ⇧}
+  - {t: S, h: ⎇}
+  - {t: D, h: ⌃}
+  - {t: F, h: ⌘}
+  - G
+  - H
+  - {t: J, h: ⌘}
+  - {t: K, h: ⌃}
+  - {t: L, h: ⎇}
+  - {t: '''', h: ⇧}
+  - Z
+  - X
+  - C
+  - V
+  - B
+  - N
+  - M
+  - {t: ',', s: <}
+  - {t: ., s: '>'}
+  - /
+  - {t: ↹, h: Mouse}
+  - {t: SPACE, h: TP}
+  - ENTER
+  - {t: ⌫, h: Right}
+  Right:
+  - HOME
+  - ↑
+  - END
+  - PG UP
+  - ⌦
+  - HOME
+  - PG DN
+  - PG UP
+  - END
+  - ':'
+  - ←
+  - ↓
+  - →
+  - PG DN
+  - ESC
+  - LARW
+  - {t: DARW, h: ⌘}
+  - {t: UARW, h: ⌃}
+  - {t: RARW, h: ⎇}
+  - {t: ;, h: ⇧, s: ':'}
+  - '&caps_word'
+  - ' '
+  - ' '
+  - ' '
+  - ' '
+  - ' '
+  - {t: '-', s: _}
+  - +
+  - {t: '`', s: '~'}
+  - '~'
+  - ' '
+  - ' '
+  - ' '
+  - {t: ' ', type: held}
+  Left:
+  - '!'
+  - '@'
+  - '#'
+  - $
+  - '%'
+  - ^
+  - '&'
+  - '*'
+  - (
+  - )
+  - {t: '1', h: ⇧}
+  - {t: '2', h: ⎇}
+  - {t: '3', h: ⌃}
+  - {t: '4', h: ⌘}
+  - '5'
+  - '6'
+  - {t: '7', h: ⌘}
+  - {t: '8', h: ⌃}
+  - {t: '9', h: ⎇}
+  - {t: '0', h: ⇧}
+  - ESC
+  - \
+  - _
+  - {t: '=', s: +}
+  - ⌦
+  - {t: '[', s: '{'}
+  - {t: ']', s: '}'}
+  - <
+  - '>'
+  - '|'
+  - ' '
+  - {t: SPACE, h: TP}
+  - ' '
+  - ' '
+  Misc:
+  - '&sys_reset'
+  - ' '
+  - ' '
+  - {t: BT, h: '3'}
+  - {t: BT, h: '0'}
+  - F1
+  - F2
+  - F3
+  - F4
+  - F5
+  - '&bootloader'
+  - ' '
+  - ' '
+  - ' '
+  - {t: BT, h: '1'}
+  - F6
+  - F7
+  - F8
+  - F9
+  - F10
+  - ' '
+  - ' '
+  - ' '
+  - BT CLR
+  - {t: BT, h: '2'}
+  - F11
+  - F12
+  - F13
+  - PAUSE BREAK
+  - PSCRN
+  - ' '
+  - ' '
+  - ' '
+  - {t: ' ', type: held}
+  TP:
+  - ' '
+  - SCRL ↓
+  - L CLK
+  - R CLK
+  - SCRL ↑
+  - Mouse ←
+  - Mouse ↓
+  - Mouse ↑
+  - Mouse →
+  - ' '
+  - ' '
+  - ' '
+  - ' '
+  - ' '
+  - Sens +
+  - '&mkp MB4'
+  - L CLK
+  - R CLK
+  - M CLK
+  - ' '
+  - ' '
+  - ' '
+  - ' '
+  - ' '
+  - Sens -
+  - '&mkp MB5'
+  - SCRL ↓
+  - SCRL ↑
+  - ' '
+  - ' '
+  - ' '
+  - {t: ' ', type: held}
+  - ' '
+  - ' '
