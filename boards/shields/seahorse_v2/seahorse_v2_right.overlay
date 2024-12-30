@@ -22,51 +22,28 @@
     };
     
     
-    /*
-    * PS/2 Mouse / Trackpoint - User Configuration
-    *
-    * Enable PS/2 drivers on this side of the keyboard.
-    * It MUST be the central half. If you connected your TP or mouse to the
-    * left side, then move the following content to `your_keyboard_left.overlay`
-    *
-    * You also need to adjust `Kconfig.defconfig` and configure that this side
-    * is the central side.
-    *
-    */
-    
-    #include <input/processors.dtsi>
-    #include <dt-bindings/zmk/input_transform.h>
-    #include <zephyr/dt-bindings/input/input-event-codes.h>
+/*
+ * PS/2 Mouse / Trackpoint - User Configuration
+ *
+ * Enable PS/2 drivers on this side of the keyboard.
+ * It MUST be the central half. If you connected your TP or mouse to the
+ * left side, then move the following content to `your_keyboard_left.overlay`
+ *
+ * You also need to adjust `Kconfig.defconfig` and configure that this side
+ * is the central side.
+ *
+ */
 
-    // Pick the PS/2 driver
-    //
-    // Comment out the following define to use the PS/2 GPIO driver instead of the
-    // UART driver.
-    //
-    // Both, the UART and GPIO drivers, implement the PS/2 protocol and work with
-    // trackpoints and other mouse devices that use PS/2.
-    //
-    // The only difference is which hardware they use on your controller to
-    // transmit the data. The UART driver has MUCH better performance and should
-    // be used by most people.
-    //
-    // The GPIO driver should only be used if your PS/2 pointing device uses a
-    // clock frequency rate that is not compatible with the UART baud rates. Or
-    // if you are NOT using a nrf52-based controller, such as the nice!nano,
-    // nice!nano clone or a seeduino xiao.
-    //
-    // In all other cases you should try using the UART driver first.
-    #define MOUSE_PS2_DRIVER_UART
-    
-    
-    // Configure the SCL and SDA pins using the`&pro_micro` notation.
-    //
-    // If possible, try to choose the blue high frequency pins to avoid
-    // bluetooth interference.
-    //
-    // It will still work even if you pick low frequency pins, but there is a risk
-    // that the trackpoint could cause bluetooth interference.
-    //
+ #define MOUSE_PS2_DRIVER_UART
+
+// Configure the SCL and SDA pins using the`&pro_micro` notation.
+//
+// If possible, try to choose the blue high frequency pins to avoid
+// bluetooth interference.
+//
+// It will still work even if you pick low frequency pins, but there is a risk
+// that the trackpoint could cause bluetooth interference.
+//
  // On the nice!nano documentation these are green DX pins:
  // https://nicekeyboards.com/docs/nice-nano/pinout-schematic
  //
@@ -332,80 +309,72 @@
  
  
  #ifdef MOUSE_PS2_DRIVER_UART
- 
-     &uart0 {
-         status = "disabled";
-         compatible = "nordic,nrf-uarte";
- 
-         current-speed = MOUSE_PS2_UART_BAUD_RATE;
-         pinctrl-0 = <&uart0_ps2_default>;
-         pinctrl-1 = <&uart0_ps2_off>;
- 
-         pinctrl-names = "default", "sleep";
- 
-         uart_ps2: uart_ps2 {
-             status="disabled";
-             compatible = "uart-ps2";
-             scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
-             sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
-         };
-     };
- 
- #else
- 
-     / {
-         gpio_ps2: gpio_ps2 {
-             status = "disabled";
- 
-             compatible = "gpio-ps2";
-             scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
-             sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
-         };
-     };
- 
- #endif
- 
- 
- / {
-     mouse_ps2: mouse_ps2 {
-        //  status = "disabled";
-         compatible = "zmk,input-mouse-ps2";
- 
- #ifdef MOUSE_PS2_DRIVER_UART
-         ps2-device = <&uart_ps2>;
- #else
-         ps2-device = <&gpio_ps2>;
- #endif
- 
- #ifdef MOUSE_PS2_PIN_RST_PRO_MICRO
-         rst-gpios = MOUSE_PS2_PIN_RST_PRO_MICRO;
- #endif
-     };
- 
-     mouse_ps2_input_listener: mouse_ps2_input_listener {
-         compatible = "zmk,input-listener-ps2";
-         status = "disabled";
- 
-         device = <&mouse_ps2>;
- 
-         // Some of the available settings depend on the keymap. So they
-         // are adjusted in...
-         // zmk-config/config/includes/mouse_tp.dtsi
+
+ &uart0 {
+    
+     compatible = "nordic,nrf-uarte";
+
+     current-speed = MOUSE_PS2_UART_BAUD_RATE;
+     pinctrl-0 = <&uart0_ps2_default>;
+     pinctrl-1 = <&uart0_ps2_off>;
+
+     pinctrl-names = "default", "sleep";
+
+     uart_ps2: uart_ps2 {
+       
+         compatible = "uart-ps2";
+         scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
+         sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
      };
  };
-/ {
-    trackpoint_listener: trackpoint_listener {
-        compatible = "zmk,input-listener";
-        device = <&mouse_ps2>;
-        input-processors = 
-            <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>
-            , <&zip_temp_layer 7 50>
-            ;
-        scroller {
-            layers = <8>;
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,<&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_xy_scaler 1 8>,<&zip_xy_to_scroll_mapper>;
-        };
-    };
 
-    
+#else
+
+ / {
+     gpio_ps2: gpio_ps2 {
+         status = "disabled";
+
+         compatible = "gpio-ps2";
+         scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
+         sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
+     };
+ };
+
+#endif
+
+
+/ {
+ mouse_ps2: mouse_ps2 {
+     compatible = "zmk,input-mouse-ps2";
+
+#ifdef MOUSE_PS2_DRIVER_UART
+     ps2-device = <&uart_ps2>;
+#else
+     ps2-device = <&gpio_ps2>;
+#endif
+
+#ifdef MOUSE_PS2_PIN_RST_PRO_MICRO
+     rst-gpios = MOUSE_PS2_PIN_RST_PRO_MICRO;
+#endif
+ };
+};
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+/ {
+ trackpoint_listener: trackpoint_listener {
+     compatible = "zmk,input-listener";
+     device = <&mouse_ps2>;
+     input-processors = 
+         <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>
+       , <&zip_temp_layer 7 500>
+         ;
+     scroller {
+         layers = <9>;
+         //process-next;
+         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,<&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_xy_scaler 1 16>,<&zip_xy_to_scroll_mapper>;
+     };
+ };
+
+ 
 };

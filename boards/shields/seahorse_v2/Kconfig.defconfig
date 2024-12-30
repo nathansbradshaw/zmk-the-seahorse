@@ -12,7 +12,7 @@
 if SHIELD_SEAHORSE_V2_RIGHT
 
 	config ZMK_KEYBOARD_NAME
-		default "Seahorse v2.0.0"
+		default "Seahorse v2.1.0"
 
 	config ZMK_SPLIT_ROLE_CENTRAL
 		default y
