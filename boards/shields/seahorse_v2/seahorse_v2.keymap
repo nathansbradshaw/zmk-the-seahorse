@@ -59,7 +59,7 @@
         , <INPUT_REL_Y INPUT_REL_WHEEL>;
     };
 
-    trackpoint_listener: trackpoint_listener {
+    &trackpoint_listener {
         compatible = "zmk,input-listener";
         device = <&tpoint0_split>; // Reference both split devices
         input-processors = <&zip_temp_layer MOUSE_TP 500>;

@@ -15,3 +15,7 @@
 &tpoint0_split { 
     status = "disabled"; 
 };
+
+&trackpoint_listener {
+    status = "disabled"
+}
