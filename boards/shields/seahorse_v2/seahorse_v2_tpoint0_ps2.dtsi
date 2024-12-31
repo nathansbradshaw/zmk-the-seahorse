@@ -329,6 +329,8 @@
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include "include/globals.h"
+
 / {
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
