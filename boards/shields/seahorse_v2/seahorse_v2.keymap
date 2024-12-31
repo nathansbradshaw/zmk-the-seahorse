@@ -102,24 +102,6 @@
             >;
         };
 
-        tri_layer {
-            display-name = "F-Keys";
-            bindings = <
-            //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-            //│ RESET    │          │          │ PROFILE  │PROFILE 0 │   │   F1     │   F2     │   F3     │   F4     │   F5     │
-            &sys_reset  &trans     &trans  &bt BT_SEL 3 &bt BT_SEL 0   &kp F1    &kp F2     &kp F3     &kp F4    &kp F5
-            //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            //│BOOTLOADER│          │          │          │PROFILE 1 │   │   F6     │   F7     │   F8     │   F9     │   F10    │
-            &bootloader  &trans     &trans     &trans    &bt BT_SEL 1    &kp F6    &kp F7     &kp F8     &kp F9    &kp F10
-            //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            //│          │          │          │ CLEAR BT │PROFILE 2 │   │   F11    │   F12    │   F13       │   PAUSE  │  PRINT   │
-            &studio_unlock &tog GAME &trans &bt BT_CLR &bt BT_SEL 2    &kp F11   &kp F12    &kp F13  &kp PAUSE_BREAK &kp PSCRN
-            //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-            &trans     &trans         &trans     &trans
-            //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-            >;
-        };
-
         Mouse_trackpoint_layer {
             display-name = "Mouse";
             bindings = <
@@ -188,6 +170,24 @@
             &kp ESC      &kp T     &kp G      &kp B      &kp M          &kp N1     &kp N2     &kp N3     &kp N4     &kp N5
             //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ╰──────────┼──────────┴──────────┴──────────┴──────────╯
             &lt GAME_LEFT ENTER    &kp SPACE   &kp BSPC   &lt GAME_RIGHT TAB
+            //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        misc_layer {
+            display-name = "F-Keys";
+            bindings = <
+            //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+            //│ RESET    │          │          │ PROFILE  │PROFILE 0 │   │   F1     │   F2     │   F3     │   F4     │   F5     │
+            &sys_reset  &trans     &trans  &bt BT_SEL 3 &bt BT_SEL 0   &kp F1    &kp F2     &kp F3     &kp F4    &kp F5
+            //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            //│BOOTLOADER│          │          │          │PROFILE 1 │   │   F6     │   F7     │   F8     │   F9     │   F10    │
+            &bootloader  &trans     &trans     &trans    &bt BT_SEL 1    &kp F6    &kp F7     &kp F8     &kp F9    &kp F10
+            //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            //│          │          │          │ CLEAR BT │PROFILE 2 │   │   F11    │   F12    │   F13       │   PAUSE  │  PRINT   │
+            &studio_unlock &tog GAME &trans &bt BT_CLR &bt BT_SEL 2    &kp F11   &kp F12    &kp F13  &kp PAUSE_BREAK &kp PSCRN
+            //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+            &trans     &trans         &trans     &trans
             //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
