@@ -23,3 +23,4 @@
     // device = <&tpoint1_split>; // Reference to the left pointing device node
 
 // Define the left pointing device node under the appropriate bus (e.g., SPI or I2C)
+};
