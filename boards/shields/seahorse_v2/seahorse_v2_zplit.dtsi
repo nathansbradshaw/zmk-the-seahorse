@@ -4,15 +4,26 @@
  * SPDX-License-Identifier: MIT
  */
 
-/{
-	split_inputs {
-		compatible = "zmk,split-inputs";
-		#address-cells = <1>;
-		#size-cells = <0>;
+ / {
+    split_inputs {
+        compatible = "zmk,split-inputs";
+        #address-cells = <1>;
+        #size-cells = <0>;
 
-		tpoint0_split: tpoint0@0 {
-			compatible = "zmk,input-split";
-			reg = <0>;
-		};
-	};
+        tpoint0_split: tpoint0@0 {
+            compatible = "zmk,input-split";
+            reg = <0>; // Central pointing device
+        };
+
+        tpoint1_split: tpoint1@1 {
+            compatible = "zmk,input-split";
+            reg = <1>; // Left (peripheral) pointing device
+        };
+    };
+
+    trackpoint_listener: trackpoint_listener {
+        compatible = "zmk,input_listener";
+        status = "disabled";
+        device = <&tpoint0_split &tpoint1_split>; 
+    };
 };

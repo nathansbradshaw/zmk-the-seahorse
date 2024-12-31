@@ -11,4 +11,15 @@
 };
 
 #include "seahorse_v2_zplit.dtsi"
-&tpoint0_split { status = "disabled"; };
+
+// Disable the central pointing device on the peripheral
+&tpoint0_split { 
+    status = "disabled"; 
+};
+
+// Enable and configure the left (peripheral) pointing device
+&tpoint1_split {
+    status = "disabled";
+    // device = <&tpoint1_split>; // Reference to the left pointing device node
+
+// Define the left pointing device node under the appropriate bus (e.g., SPI or I2C)
