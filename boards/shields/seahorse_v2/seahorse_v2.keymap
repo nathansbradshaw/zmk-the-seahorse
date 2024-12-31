@@ -34,12 +34,12 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        tri_layer {
+        misc_layer {
             if-layers = <L_RIGHT L_LEFT>;
-            then-layer = <MISC>;
+            then-layer = <MISC>;    
         };
 
-        tri_layer_6_7_to_3 {
+        misc_layer_Game {
             if-layers = <GAME_RIGHT GAME_LEFT>;
             then-layer = <MISC>;
         };
@@ -85,7 +85,7 @@
         };
 
         left_layer {
-            display-name = "Num-Sym";
+            display-name = "Num";
             bindings = <
             //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
             //│    !     │  @       │  #       │  $       │ %        │   │  ^       │  &       │  *       │  (       │  )       │
@@ -174,8 +174,16 @@
             >;
         };
 
+        extra1 {
+            status = "reserved";
+        };
+
+        extra2 {
+            status = "reserved";
+        };
+
         misc_layer {
-            display-name = "F-Keys";
+            display-name = "misc";
             bindings = <
             //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
             //│ RESET    │          │          │ PROFILE  │PROFILE 0 │   │   F1     │   F2     │   F3     │   F4     │   F5     │
@@ -191,17 +199,6 @@
             //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
-
-
-
-        extra1 {
-            status = "reserved";
-        };
-
-        extra2 {
-            status = "reserved";
-        };
-
 
     };
 };
