@@ -392,7 +392,7 @@
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
-        input-processors = <&xy_transf (INPUT_TRANSFORM_Y_INVERT)>;
+        input-processors = <&xy_transf (INPUT_TRANSFORM_X_INVERT)>;
         precise {
             layers = <4>;
             input-processors = <&xy_scaler 2 3>;
