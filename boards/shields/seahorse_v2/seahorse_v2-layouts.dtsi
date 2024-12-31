@@ -26,7 +26,7 @@
         keys  //                     w   h    x    y     rot    rx    ry
             = 
             //top letter row
-              <&key_physical_attrs 100 100    0  175       0     0     0>
+              <&key_physical_attrs 100 100    0  200       0     0     0>
             , <&key_physical_attrs 100 100  100  150       0     0     0>
             , <&key_physical_attrs 100 100  200  125       0     0     0>
             , <&key_physical_attrs 100 100  300  100       0     0     0>

@@ -8,8 +8,11 @@
 #define DEFAULT 0
 #define L_RIGHT 1
 #define L_LEFT 2
+#define MISC 3
 #define MOUSE_TP 4
-#define MOUSE_KEYS 5 // TODO
+#define GAME 5 // TODO
+#define GAME_RIGHT 6
+#define GAME_LEFT 7
 
 /*
  * Defines to enable/disable features
@@ -56,9 +59,15 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
+            if-layers = <L_RIGHT L_LEFT>;
+            then-layer = <MISC>;
         };
+
+        tri_layer_6_7_to_3 {
+            if-layers = <GAME_RIGHT GAME_LEFT>;
+            then-layer = <MISC>;
+        };
+        
     };
 
     keymap {
@@ -152,6 +161,71 @@
         //                                          ╰─────────────┴─────────────╯   ╰─────────────┴─────────────╯
             >;
         };
+
+        Game_layer {
+            display-name = "Games";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  CTRL    │  Q       │  W       │  E       │  R       │   │  T       │  Y       │  UP      │  I       │  O       │
+            &kp LCTRL   &kp Q      &kp W      &kp E      &kp R          &kp T      &kp Y      &kp UP      &kp I      &kp O
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  SHIFT   │  A       │ S        │  D       │  F       │   │  D       │  LEFT    │  DOWN    │  RIGHT   │  J       │
+            &kp LSHFT   &kp A     &kp S       &kp D      &kp F          &kp D      &kp LEFT   &kp DOWN   &kp RIGHT  &kp J
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  Alt     │  Z       │  X       │  C       │  V       │   │ 1        │ 2        │ 3        │ 4        │ 5        │
+            &kp LALT  &kp Z      &kp X      &kp C      &kp V           &kp N1     &kp N2     &kp N3     &kp N4     &kp N5
+        //╰──────────┴──────────┴──────────┼──────────┼──────────╯   ╰──────────┼──────────┴──────────┴──────────┴──────────╯
+                                 &lt GAME_LEFT ENTER    &kp SPACE      &kp BSPC   &lt GAME_RIGHT TAB
+        //                     ╰──────────────┴──────────────────╯   ╰──────────┴────────────────╯
+            >;
+        };
+
+        game_right_layer {
+            display-name = "Nav";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│ HOME     │ UP       │  END     │ PAGE UP  │ DEL      │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
+            &kp HOME   &kp UP     &kp END   &kp PG_UP  &kp DEL          &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ LEFT     │  DOWN    │ RIGHT    │ PAGE DOWN│ ESC      │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
+           &kp LEFT   &kp DOWN   &kp RIGHT  &kp PG_DN  &kp ESC         &kp LARW   HRMR(DARW,  UARW,    RARW,      SEMI)
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ CAPS     │ PRINT SC │volume up │volume dwn│  Next    │   │ PREV SONG│    -     │     +    │   `      │   ~      │
+           &caps_word  &trans   &trans      &trans     &trans         &trans      &kp MINUS  &kp PLUS   &kp GRAVE  &kp TILDE
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans      &trans        &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        game_left_layer {
+            display-name = "Num-Sym";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│    !     │  @       │  #       │  $       │ %        │   │  ^       │  &       │  *       │  (       │  )       │
+            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET   &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│   1      │  2       │  3       │  4       │  5       │   │  6       │  7       │  8       │  9       │  0       │
+            HRML(N1,    N2,       N3,        N4)        &kp N5         &kp N6     HRMR(N7,   N8,        N9,         N0)
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  esc     │          │  _       │    =     │  del     │   │  [       │   ]      │  <       │  >       │         │
+           &kp ESC     &kp BSLH  &kp UNDER &kp EQUAL   &kp DEL       &kp LBKT    &kp RBKT   &kp LT     &kp GT     &kp PIPE  
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans &lt MOUSE_TP SPACE      &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+
+
+        extra1 {
+            status = "reserved";
+        };
+
+        extra2 {
+            status = "reserved";
+        };
+
 
     };
 };
