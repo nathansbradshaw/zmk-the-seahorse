@@ -358,3 +358,5 @@
         #endif
     };
 };
+
+&mouse_ps2 { device = <&mouse_ps2> }
