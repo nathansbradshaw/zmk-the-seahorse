@@ -61,7 +61,7 @@
 
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
-        device = <&tpoint0_split &tpoint1_split>; // Reference both split devices
+        device = <&tpoint1_central>; // Reference both split devices
         input-processors = <&zip_temp_layer MOUSE_TP 500>;
         precise {
             layers = <4>;
