@@ -211,7 +211,7 @@
     uart0_ps2_default: uart0_ps2_default {
         group1 {
             psels = MOUSE_PS2_PIN_UNEXPOSED_TX,
-                     MOUSE_PS2_PIN_SDA_PINCTRL;
+                    MOUSE_PS2_PIN_SDA_PINCTRL;
         };
     };
 
@@ -219,7 +219,7 @@
     uart0_ps2_sleep: uart0_ps2_sleep {
         group1 {
             psels = MOUSE_PS2_PIN_UNEXPOSED_TX,
-                     MOUSE_PS2_PIN_SDA_PINCTRL;
+                    MOUSE_PS2_PIN_SDA_PINCTRL;
             low-power-enable;
         };
     };
@@ -235,7 +235,7 @@
     uart0_ps2_off: uart0_ps2_off {
         group1 {
             psels = MOUSE_PS2_PIN_UNEXPOSED_TX,
-                     MOUSE_PS2_PIN_UNEXPOSED_RX;
+                    MOUSE_PS2_PIN_UNEXPOSED_RX;
         };
     };
 };
@@ -254,7 +254,7 @@
     pinctrl-names = "default", "sleep";
 
     uart_ps2: uart_ps2 {
-        status="disabled";
+        status = "disabled";
         compatible = "uart-ps2";
         scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
         sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
@@ -281,13 +281,13 @@
         compatible = "zmk,input-mouse-ps2";
 
         #ifdef MOUSE_PS2_DRIVER_UART
-            ps2-device = <&uart_ps2>;
+        ps2-device = <&uart_ps2>;
         #else
-            ps2-device = <&gpio_ps2>;
+        ps2-device = <&gpio_ps2>;
         #endif
 
         #ifdef MOUSE_PS2_PIN_RST_PRO_MICRO
-            rst-gpios = MOUSE_PS2_PIN_RST_PRO_MICRO;
+        rst-gpios = MOUSE_PS2_PIN_RST_PRO_MICRO;
         #endif
     };
 };
@@ -322,7 +322,26 @@
     //  tp-xy-swap;
     tp-x-invert;
     //  tp-y-invert;
-    
+
     // These values are allowed: 10,20,40,60,80,100,200
     sampling-rate = <80>;
 };
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+/ {
+    trackpoint_listener: trackpoint_listener {
+        compatible = "zmk,input-listener";
+        device = <&tpoint0_split>;
+        input-processors = <&zip_temp_layer MOUSE_TP 500>;
+        precise {
+            layers = <4>;
+            input-processors = <&xy_scaler 2 3>;
+        };
+        scroll {
+            layers = <4>;
+            input-processors = <&xy_scaler 1 22>, <&x_scaler 0 1>, <&to_wheel>;
+        };
+    };
+};
+
