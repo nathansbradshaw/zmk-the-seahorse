@@ -21,36 +21,6 @@
 
 / {
 
-    xy_transf: xy_transf {
-        compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <1>;
-        type = <INPUT_EV_REL>;
-        x-codes = <INPUT_REL_X>, <INPUT_REL_WHEEL>;
-        y-codes = <INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
-    };
-    xy_scaler: xy_scaler {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <2>;
-        type = <INPUT_EV_REL>;
-        codes = <INPUT_REL_X>, <INPUT_REL_Y>;
-        track-remainders;
-    };
-    x_scaler: x_scaler {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <2>;
-        type = <INPUT_EV_REL>;
-        codes = <INPUT_REL_X>;
-    };
-    to_wheel: to_wheel {
-        compatible = "zmk,input-processor-code-mapper";
-        #input-processor-cells = <0>;
-        type = <INPUT_EV_REL>;
-        map = <INPUT_REL_X INPUT_REL_HWHEEL>
-        , <INPUT_REL_Y INPUT_REL_WHEEL>;
-    };
-
-
-
     behaviors {
         ht: hold_tap {
             compatible = "zmk,behavior-hold-tap";

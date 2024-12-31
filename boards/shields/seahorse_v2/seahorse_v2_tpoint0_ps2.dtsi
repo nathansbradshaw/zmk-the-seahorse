@@ -326,12 +326,42 @@
     // These values are allowed: 10,20,40,60,80,100,200
     sampling-rate = <80>;
 };
+
+
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include "include/globals.h"
 
 / {
+    xy_transf: xy_transf {
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+        x-codes = <INPUT_REL_X>, <INPUT_REL_WHEEL>;
+        y-codes = <INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
+    };
+    xy_scaler: xy_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X>, <INPUT_REL_Y>;
+        track-remainders;
+    };
+    x_scaler: x_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X>;
+    };
+    to_wheel: to_wheel {
+        compatible = "zmk,input-processor-code-mapper";
+        #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
+        map = <INPUT_REL_X INPUT_REL_HWHEEL>
+        , <INPUT_REL_Y INPUT_REL_WHEEL>;
+    };
+
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
         device = <&tpoint0_split>;

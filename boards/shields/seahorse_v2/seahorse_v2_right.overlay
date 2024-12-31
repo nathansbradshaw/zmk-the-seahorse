@@ -22,8 +22,3 @@
 };
 
 #include "seahorse_v2_tpoint0_ps2.dtsi"
-#include "seahorse_v2_zplit.dtsi"
-&trackpoint_listener {
-    status = "okay";
-};
-&tpoint0_split { device = <&tpoint0>; };

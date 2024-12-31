@@ -9,13 +9,3 @@
             , <&pro_micro 18 GPIO_ACTIVE_HIGH> // col 4
             ;
 };
-
-#include "seahorse_v2_zplit.dtsi"
-
-&tpoint0_split { 
-    status = "disabled"; 
-};
-
-&trackpoint_listener {
-    status = "disabled";
-};
