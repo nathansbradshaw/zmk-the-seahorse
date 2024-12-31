@@ -393,8 +393,7 @@
         compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
         input-processors = 
-            <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>
-        , <&zip_temp_layer 4 500>
+             <&zip_temp_layer 4 500>
             ;
             precise {
                 layers = <4>;
