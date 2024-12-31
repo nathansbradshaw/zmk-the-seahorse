@@ -21,6 +21,6 @@
     ;
 };
 
-#include "seahorse_v2_tpoint0.overlay"
+#include "seahorse_v2_tpoint0_ps2.overlay"
 #include "seahorse_v2_zplit.dtsi"
 &tpoint0_split { device = <&tpoint0>; };
