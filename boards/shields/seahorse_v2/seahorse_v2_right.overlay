@@ -367,7 +367,7 @@
         #input-processor-cells = <1>;
         type = <INPUT_EV_REL>;
         x-codes = <INPUT_REL_X>, <INPUT_REL_WHEEL>;
-        y-codes = -<INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
+        y-codes = <INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
     };
     xy_scaler: xy_scaler {
         compatible = "zmk,input-processor-scaler";
