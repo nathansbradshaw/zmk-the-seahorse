@@ -54,6 +54,12 @@
             global-quick-tap;
             bindings = <&kp>, <&kp>;
         };
+
+        toggle_layer_5: behavior {
+            compatible = "zmk,behavior-toggle-layer";
+            label = "Toggle Layer 5";
+            bindings = <5>;
+        };
     };
 
     conditional_layers {
@@ -137,7 +143,7 @@
           &bootloader  &trans     &trans     &trans    &bt BT_SEL 1    &kp F6    &kp F7     &kp F8     &kp F9    &kp F10
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │   F11    │   F12    │   F13       │   PAUSE  │  PRINT   │
-        &studio_unlock &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &kp F11   &kp F12    &kp F13  &kp PAUSE_BREAK &kp PSCRN
+        &studio_unlock &toggle_layer_5 &trans &bt BT_CLR &bt BT_SEL 2    &kp F11   &kp F12    &kp F13  &kp PAUSE_BREAK &kp PSCRN
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
