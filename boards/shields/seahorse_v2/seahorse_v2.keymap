@@ -8,6 +8,9 @@
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/mouse.h>
+#include <behaviors/mouse_keys.dtsi>
+#include "include/mouse_tp.dtsi"
 
 #define DEFAULT 0
 #define L_RIGHT 1
@@ -19,19 +22,6 @@
 #define GAME_LEFT 7
 #define EXTRA1 8
 #define EXTRA2 9
-
-// Define optional features
-#define HAS_MOUSE_KEYS
-#define HAS_MOUSE_TP
-
-#ifdef HAS_MOUSE_KEYS
-#include <dt-bindings/zmk/mouse.h>
-#include <behaviors/mouse_keys.dtsi>
-#endif
-
-#ifdef HAS_MOUSE_TP
-#include "include/mouse_tp.dtsi"
-#endif
 
 
 // Home row mods macro
@@ -69,7 +59,7 @@
         , <INPUT_REL_Y INPUT_REL_WHEEL>;
     };
 
-    trackpoint_listener: trackpoint_listener {
+    tpoint0_mmv_il {
         compatible = "zmk,input-listener";
         device = <&tpoint0_split>;
         input-processors = <&zip_temp_layer MOUSE_TP 500>;
