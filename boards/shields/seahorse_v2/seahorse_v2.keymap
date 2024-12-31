@@ -71,7 +71,7 @@
 
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
-        device = <&mouse_ps2>;
+        device = <&tpoint0_split>;
         input-processors = <&zip_temp_layer 4 500>;
         precise {
             layers = <4>;

@@ -417,3 +417,5 @@
     // scroll-mode;
 
   };
+
+&tpoint0_split { device = <&mouse_ps2>; };

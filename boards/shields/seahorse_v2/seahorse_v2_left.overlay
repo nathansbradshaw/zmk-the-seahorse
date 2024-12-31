@@ -9,3 +9,5 @@
             , <&pro_micro 18 GPIO_ACTIVE_HIGH> // col 4
             ;
 };
+
+&tpoint0_split { status = "disabled"; };
