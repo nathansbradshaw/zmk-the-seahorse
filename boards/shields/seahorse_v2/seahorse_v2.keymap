@@ -5,6 +5,10 @@
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/outputs.h>
 
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
 #define DEFAULT 0
 #define L_RIGHT 1
 #define L_LEFT 2
@@ -36,6 +40,50 @@
 #define HYPER(k1) &ht LS(LC(LA(LGUI))) k1
 
 / {
+
+    xy_transf: xy_transf {
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+        x-codes = <INPUT_REL_X>, <INPUT_REL_WHEEL>;
+        y-codes = <INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
+    };
+    xy_scaler: xy_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X>, <INPUT_REL_Y>;
+        track-remainders;
+    };
+    x_scaler: x_scaler {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_X>;
+    };
+    to_wheel: to_wheel {
+        compatible = "zmk,input-processor-code-mapper";
+        #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
+        map = <INPUT_REL_X INPUT_REL_HWHEEL>
+            , <INPUT_REL_Y INPUT_REL_WHEEL>;
+    };
+
+    trackpoint_listener: trackpoint_listener {
+        compatible = "zmk,input-listener";
+        device = <&mouse_ps2>;
+        input-processors = <&zip_temp_layer 4 500>;
+        precise {
+            layers = <4>;
+            input-processors = <&xy_scaler 2 3>;
+        };
+        scroll {
+            layers = <4>;
+            input-processors = <&xy_scaler 1 22>, <&x_scaler 0 1>, <&to_wheel>;
+        };
+    };
+
+
     behaviors {
         ht: hold_tap {
             compatible = "zmk,behavior-hold-tap";
