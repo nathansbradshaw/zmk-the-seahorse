@@ -25,4 +25,4 @@
 #include "seahorse_v2_zplit.dtsi"
 &trackpoint_listener {
     status = "okay";
-}
+};
