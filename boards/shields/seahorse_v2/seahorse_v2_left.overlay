@@ -17,5 +17,5 @@
 };
 
 &trackpoint_listener {
-    status = "disabled"
-}
+    status = "disabled";
+};
