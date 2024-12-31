@@ -45,19 +45,17 @@
 / {
     behaviors {
         ht: hold_tap {
-            label = "hold_tap";
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <180>;
-            global-quick-tap;
             bindings = <&kp>, <&kp>;
         };
 
         toggle_layer_5: behavior {
             compatible = "zmk,behavior-toggle-layer";
-            label = "Toggle Layer 5";
+            #binding-cells = <1>;
             bindings = <5>;
         };
     };
