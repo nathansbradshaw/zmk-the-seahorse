@@ -55,7 +55,7 @@
 
         toggle_layer_5: behavior {
             compatible = "zmk,behavior-toggle-layer";
-            #binding-cells = <0>;
+            #binding-cells = <1>;
             layer = <5>;
         };
     };
