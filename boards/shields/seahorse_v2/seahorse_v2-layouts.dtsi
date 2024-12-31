@@ -62,8 +62,8 @@
             , <&key_physical_attrs 100 100 1300  325       0     0     0>
             , <&key_physical_attrs 100 100 1400  350       0     0     0>
             //thunb row
-            , <&key_physical_attrs 100 100    0  500       0     0     0>
-            , <&key_physical_attrs 100 100  100  475       0     0     0>
+            , <&key_physical_attrs 100 100  300  500       0     0     0>
+            , <&key_physical_attrs 100 100  400  475       0     0     0>
             //
             , <&key_physical_attrs 100 100 1000  475       0     0     0>
             , <&key_physical_attrs 100 100 1100  450       0     0     0>
