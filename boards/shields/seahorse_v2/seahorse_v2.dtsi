@@ -11,34 +11,34 @@
 		zmk,physical-layout = &physical_layout0;
 	};
 	keypad_position_map {
-        compatible = "zmk,physical-layout-position-map";
+		compatible = "zmk,physical-layout-position-map";
 
-        physical_layout0 {
-            physical-layout = <&physical_layout0>;
-            positions = <>;
-        };
-    };
+		physical_layout0 {
+			physical-layout = <&physical_layout0>;
+			positions = <>;
+		};
+	};
 
 	kscan0: kscan {
 		compatible = "zmk,kscan-gpio-matrix";
 		wakeup-source;
-		
+
 		diode-direction = "col2row";
-        row-gpios
-            = <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 0
-            , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 1
-            , <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 2
-            , <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 3
-            ;
+		row-gpios
+		= <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 0
+		, <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 1
+		, <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 2
+		, <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 3
+		;
 	};
 
-		split_inputs {
-		  #address-cells = <1>;
-		  #size-cells = <0>;
+	split_inputs {
+		#address-cells = <1>;
+		#size-cells = <0>;
 
-		  tpad0_split: tpad0@0 { compatible = "zmk,input-split"; reg = <0>; };
-		};
-	  
+		tpoint0_split: tpad0@0 {compatible = "zmk,input-split"; reg = <0>; };
+	};
+
 
 };
 &pro_micro_i2c {
