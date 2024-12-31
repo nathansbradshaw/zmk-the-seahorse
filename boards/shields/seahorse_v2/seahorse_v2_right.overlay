@@ -367,7 +367,7 @@
         #input-processor-cells = <1>;
         type = <INPUT_EV_REL>;
         x-codes = <INPUT_REL_X>, <INPUT_REL_WHEEL>;
-        y-codes = <INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
+        y-codes = -<INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
     };
     xy_scaler: xy_scaler {
         compatible = "zmk,input-processor-scaler";
@@ -392,7 +392,7 @@
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
-        input-processors =  <&xy_transf (INPUT_TRANSFORM_Y_INVERT)>, <&zip_temp_layer 4 500>;
+        input-processors = <&xy_transf>;
         precise {
             layers = <4>;
             input-processors = <&xy_scaler 2 3>;
