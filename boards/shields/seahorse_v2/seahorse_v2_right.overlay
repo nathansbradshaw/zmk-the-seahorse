@@ -23,4 +23,4 @@
 
 #include "seahorse_v2_tpoint0.overlay"
 #include "seahorse_v2_zplit.dtsi"
-&tpoint0_split { device = <&mouse_ps2>; };
+&tpoint0_split { device = <&tpoint0>; };

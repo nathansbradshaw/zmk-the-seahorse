@@ -73,50 +73,6 @@
 //
 // TLDR WARNING:
 // Most likely you won't need to adjust this. So leave it at the default value
-// of 14,400 and test if your mouse or trackpoint works.
-//
-// If it doesn't work, try using the GPIO version of the driver. If it works
-// with the GPIO driver, then try using the UART driver with the BAUD rates
-// 19,200 and 9,600.
-//
-// So far, all the trackpoints, which the community tested, worked with the
-// 14,400 rate.
-//
-// Explanation what this is:
-//
-// PS/2 uses a clock pin to syncronize data transmissions. UART on the
-// other hand uses a pre-defined frequency (baud rate).
-//
-// Fortunately, one of the available baud rates is very close to the
-// frequency used in IBM/Lenovo trackpoints.
-//
-// You can find other configurable baud rates here:
-// https: //docs.zephyrproject.org/latest/build/dts/api/bindings/serial/nordic,nrf-uarte.html
-//
-// You can also measure the frequency of your mouse/TP using a $5 logic
-// analyzer from AliExpress.
-//
-// Actual frequency of PS/2 trackpoint: 67us
-// Corresponding baud rate: 14,925
-//
-// Closest available baud rate in zephyr: 14,400
-// Corresponding cycle length: 69.44 microseconds
-//
-// Calculations:
-//
-// Convert cycle length in microseconds into baud:
-// 1 / PS2_CYCLE_LENGTH * 1000000 =  BAUD
-// 1 / 67 * 1000000 = 14,925 BAUD
-//
-// Convert baud into cycle length:
-// 1 / BAUD * 1000000 = CYCLE_LEN (in microseconds)
-// 1 / 14400 * 1000000 = 69.44
-//
-// Most likely values
-//
-// The PS/2 protocol specifies that devices must use a clock line
-// frequency in the range of 10 - 16.7 kHz.
-//
 // Most trackpoints seem to operate at around 14-15kHz.
 //
 // Therefore, the most likely values to try are:
@@ -320,7 +276,7 @@
 
 
 / {
-    mouse_ps2: mouse_ps2 {
+    tpoint0: tpoint0 {
         status = "disabled";
         compatible = "zmk,input-mouse-ps2";
 
@@ -341,7 +297,7 @@
 &uart_ps2 {
     status = "okay";
 };
-&mouse_ps2 {
+&tpoint0 {
     status = "okay";
     disable-clicking;
     // How sensitive the TP is (Default: 128)

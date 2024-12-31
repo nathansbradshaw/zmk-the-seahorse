@@ -17,11 +17,11 @@
   // On boot the settings will be restored again.
   //
   // If you prefer a more explicit way of configuration, you can also hardcode
-  // these settings in `&mouse_ps2`.
+  // these settings in `&tpoint0`.
   //
-  // If you set these settings in `&mouse_ps2`, you will still be able to
+  // If you set these settings in `&tpoint0`, you will still be able to
   // adjust the values during runtime with these key codes, but after
-  // restarting the board the values in `&mouse_ps2` will be restored and not
+  // restarting the board the values in `&tpoint0` will be restored and not
   // the ones stored in the flash using the key codes.
 
 
@@ -44,7 +44,7 @@
   // lets you tap or press on the trackpoint to click.
   //
   // Not all trackpoints support it and you have to enable
-  // `tp-press-to-select;` in `&mouse_ps2` first.
+  // `tp-press-to-select;` in `&tpoint0` first.
   #define U_MSS_TP_PT_I &mms MS_TP_PTS_THRESHOLD_INCR
   #define U_MSS_TP_PT_D &mms MS_TP_PTS_THRESHOLD_DECR
 
@@ -58,10 +58,10 @@
   #define U_MSS_RESET   &mms MS_RESET
 
 
-  // If you prefer to set the settings in `&mouse_ps2`, you can use the key
+  // If you prefer to set the settings in `&tpoint0`, you can use the key
   // codes above to find the settings you like the most and then press this
   // key code to output the settings to the log.
   //
-  // Then you can add those values to `&mouse_ps2`
+  // Then you can add those values to `&tpoint0`
   #define U_MSS_LOG     &mms MS_LOG
 #endif  // HAS_MOUSE_TP
