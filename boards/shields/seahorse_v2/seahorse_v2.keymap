@@ -30,7 +30,7 @@
 #endif
 
 #ifdef HAS_MOUSE_TP
-#include "include/mouse_tp.dtsi"
+// #include "include/mouse_tp.dtsi"
 #endif
 
 
@@ -56,23 +56,23 @@
         track-remainders;
     };
     x_scaler: x_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_X>;
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X>;
     };
     to_wheel: to_wheel {
         compatible = "zmk,input-processor-code-mapper";
         #input-processor-cells = <0>;
         type = <INPUT_EV_REL>;
         map = <INPUT_REL_X INPUT_REL_HWHEEL>
-            , <INPUT_REL_Y INPUT_REL_WHEEL>;
+        , <INPUT_REL_Y INPUT_REL_WHEEL>;
     };
 
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
         device = <&tpoint0_split>;
-        input-processors = <&zip_temp_layer 4 500>;
+        input-processors = <&zip_temp_layer MOUSE_TP 500>;
         precise {
             layers = <4>;
             input-processors = <&xy_scaler 2 3>;
