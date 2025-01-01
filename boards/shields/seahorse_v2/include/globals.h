@@ -5,6 +5,6 @@
 #define GAME 4
 #define GAME_RIGHT 5
 #define GAME_LEFT 6
-#define EXTRA1 7
-#define EXTRA2 8
-#define MISC 9
+#define MISC 7
+#define EXTRA1 8
+#define EXTRA2 9
