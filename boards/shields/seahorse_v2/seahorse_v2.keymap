@@ -125,13 +125,13 @@
             bindings = <
             //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
             //│  CTRL    │  Q       │  W       │  E       │  R       │   │  T       │  Y       │  UP      │  I       │  O       │
-            &kp LCTRL   &kp Q      &kp W      &kp E      &kp R          &kp T      &kp Y      &kp UP      &kp I      &kp O
+                &kp LCTRL   &kp Q      &kp W      &kp E      &kp R          &kp T      &kp Y      &kp UP      &kp I      &kp O
             //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
             //│  SHIFT   │  A       │ S        │  D       │  F       │   │  D       │  LEFT    │  DOWN    │  RIGHT   │  J       │
-            &kp LSHFT   &kp A     &kp S       &kp D      &kp F          &kp D      &kp LEFT   &kp DOWN   &kp RIGHT  &kp J
+                &kp LSHFT   &kp A     &kp S       &kp D      &kp F          &kp D      &kp LEFT   &kp DOWN   &kp RIGHT  &kp J
             //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
             //│  Alt     │  Z       │  X       │  C       │  V       │   │ 1        │ 2        │ 3        │ 4        │ 5        │
-            &kp LALT  &kp Z      &kp X      &kp C      &kp V           &kp N1     &kp N2     &kp N3     &kp N4     &kp N5
+                &kp LALT  &kp Z      &kp X      &kp C      &kp V       &msc SCRL_DOWN &mkp LCLK   &mkp RCLK  &mkp MCLK  &msc SCRL_UP 
             //╰──────────┴──────────┴──────────┼──────────┼──────────╯   ╰──────────┼──────────┴──────────┴──────────┴──────────╯
             &lt GAME_LEFT ENTER    &kp SPACE      &kp BSPC   &lt GAME_RIGHT TAB
             //                     ╰──────────────┴──────────────────╯   ╰──────────┴────────────────╯
