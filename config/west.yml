@@ -10,6 +10,8 @@ manifest:
       url-base: https://github.com/urob
     - name: badjeff
       url-base: https://github.com/badjeff
+    - name: nathansbradshaw
+      url-base: https://github.com/nathansbradshaw
 
   projects:
 
@@ -66,6 +68,10 @@ manifest:
 
     - name: zmk-helpers
       remote: urob
+      revision: main
+    
+    - name: nice-view-gem
+      remote: nathansbradshaw
       revision: main
 
   self:
