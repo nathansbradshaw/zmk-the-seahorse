@@ -1,0 +1,11 @@
+/*
+ * Copyright (c) 2020 Pete Johanson
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "seahorse_v2.dtsi"
+    &default_transform0 {
+        col-offset = <5>;
+    };
+#include "seahorse_v2_tpoint0_ps2.dtsi"

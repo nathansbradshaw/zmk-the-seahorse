@@ -1,10 +1,13 @@
 {
     "cSpell.words": [
+        "alda",
         "cryptocell",
         "dtsi",
         "gpios",
         "gpiote",
+        "loce",
         "nfct",
+        "ngpios",
         "pinctrl",
         "PSEL",
         "psels",
@@ -12,6 +15,7 @@
         "qspi",
         "tpoint",
         "uart",
-        "usbd"
+        "usbd",
+        "xiao"
     ]
 }
