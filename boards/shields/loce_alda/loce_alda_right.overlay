@@ -8,4 +8,4 @@
     &default_transform0 {
         col-offset = <6>;
     };
-#include "loce_alda_tpoint0_ps2.dtsi"
+// #include "loce_alda_tpoint0_ps2.dtsi"
