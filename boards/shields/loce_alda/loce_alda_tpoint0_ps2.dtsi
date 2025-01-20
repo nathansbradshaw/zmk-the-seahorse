@@ -33,8 +33,8 @@
 // But on the seahorse keyboard, these pins are used for the backlight. So, this
 // example config uses the pins D16 and D10 for clock and data and
 // D9 for the reset circuit.
-#define MOUSE_PS2_PIN_SCL_PRO_MICRO <&pro_micro 5 GPIO_ACTIVE_HIGH>
-#define MOUSE_PS2_PIN_SDA_PRO_MICRO <&pro_micro 4 GPIO_ACTIVE_HIGH>
+#define MOUSE_PS2_PIN_SCL_PRO_MICRO <&xiao_d 5 GPIO_ACTIVE_HIGH>
+#define MOUSE_PS2_PIN_SDA_PRO_MICRO <&xiao_d 4 GPIO_ACTIVE_HIGH>
 
 // Configure the Power-On-Reset pin
 //
@@ -46,7 +46,7 @@
 // trackpoint reset circuit.
 //
 // It's ok to use a low-frequency pin for this.
-#define MOUSE_PS2_PIN_RST_PRO_MICRO <&pro_micro 6 GPIO_ACTIVE_HIGH>
+#define MOUSE_PS2_PIN_RST_PRO_MICRO <&xiao_d 6 GPIO_ACTIVE_HIGH>
 
 // Configure SDA pin using the pinctrl notation
 //
