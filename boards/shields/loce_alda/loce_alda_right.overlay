@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include "seahorse_v2.dtsi"
+#include "loce_alda.dtsi"
     &default_transform0 {
-        col-offset = <5>;
+        col-offset = <6>;
     };
-#include "seahorse_v2_tpoint0_ps2.dtsi"
+#include "loce_alda_tpoint0_ps2.dtsi"
