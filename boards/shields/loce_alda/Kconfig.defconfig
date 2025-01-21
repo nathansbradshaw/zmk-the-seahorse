@@ -12,7 +12,7 @@
 if SHIELD_LOCE_ALDA_RIGHT
 
 	config ZMK_KEYBOARD_NAME
-		default "Loce Alda v1.0.0"
+		default "LoceAlda v1.0.0"
 
 	config ZMK_SPLIT_ROLE_CENTRAL
 		default y
