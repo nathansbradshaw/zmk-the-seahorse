@@ -76,8 +76,8 @@
             //│ LEFT     │  LEFT    │ DOWN     │ RIGHT    | BSPC     │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
                 &kp LSHFT   &kp LEFT   &kp DOWN  &kp RIGHT  &kp BSPC         &kp LARW   HRMR(DARW,  UARW,    RARW,      SEMI)
             //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            //│ CAPS     │ PRINT SC │page down │page up   │          │   │ PREV SONG│    -     │     +    │   `      │   ~      │
-                &caps_word  &trans   &kp PG_DOWN &kp PG_UP  &trans         &trans      &kp MINUS  &kp PLUS   &kp GRAVE  &kp TILDE
+            //│ CAPS     │          │page down │page up   │          │   │ PREV SONG│    -     │     +    │   `      │   ~      │
+                &caps_word  &trans &kp PG_DN &kp PG_UP  &trans         &trans      &kp MINUS  &kp PLUS   &kp GRAVE  &kp TILDE
             //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                                 &trans      &trans        &trans     &trans
             //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
