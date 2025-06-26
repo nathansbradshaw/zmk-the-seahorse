@@ -70,14 +70,14 @@
             display-name = "Nav";
             bindings = <
             //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-            //│ HOME     │ UP       │  END     │ PAGE UP  │ DEL      │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
-                &kp HOME   &kp UP     &kp END   &kp PG_UP  &kp DEL          &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
+            //│ ESC      │ HOME     │  UP      │ END      │ DEL      │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
+                &kp ESC   &kp HOME   &kp UP   &kp END  &kp DEL          &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
             //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            //│ LEFT     │  DOWN    │ RIGHT    │ PAGE DOWN│ ESC      │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
-                &kp LEFT   &kp DOWN   &kp RIGHT  &kp PG_DN  &kp ESC         &kp LARW   HRMR(DARW,  UARW,    RARW,      SEMI)
+            //│ LEFT     │  LEFT    │ DOWN     │ RIGHT    | BSPC     │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
+                &kp LSHFT   &kp LEFT   &kp DOWN  &kp RIGHT  &kp BSPC         &kp LARW   HRMR(DARW,  UARW,    RARW,      SEMI)
             //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            //│ CAPS     │ PRINT SC │volume up │volume dwn│  Next    │   │ PREV SONG│    -     │     +    │   `      │   ~      │
-                &caps_word  &trans   &trans      &trans     &trans         &trans      &kp MINUS  &kp PLUS   &kp GRAVE  &kp TILDE
+            //│ CAPS     │ PRINT SC │page down │page up   │          │   │ PREV SONG│    -     │     +    │   `      │   ~      │
+                &caps_word  &trans   &kp PG_DOWN &kp PG_UP  &trans         &trans      &kp MINUS  &kp PLUS   &kp GRAVE  &kp TILDE
             //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                                 &trans      &trans        &trans     &trans
             //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
