@@ -301,7 +301,7 @@
     status = "okay";
     disable-clicking;
     // How sensitive the TP is (Default: 128)
-    tp-sensitivity = <64>;
+    tp-sensitivity = <100>;
 
     // The maximum mouse movement speed the TP will accelarate to
     // (Default: 97)
