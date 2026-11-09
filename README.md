@@ -1,104 +1,82 @@
-# zmk-the-seahorse
-Firmware for the sea horse pcb based on the Ferris Sweep
-The board can be found here: https://github.com/nathansbradshaw/the-seahorse
+# Seahorse v2.1.0 firmware
 
-V2 has a TrackPoint and uses the PS/2 UART driver module pinned in
-[`config/west.yml`](config/west.yml).
+This is the maintained Seahorse firmware repository. It combines the original
+`zmk-the-seahorse` history with the deployed v2.1.0 configuration from
+[`zmk-seahorse-config`](https://github.com/nathansbradshaw/zmk-seahorse-config)
+at `419d09b184cee938bf4dffc09b12a96de93c367b`. Both Git histories are preserved.
+The [keyboard hardware](https://github.com/nathansbradshaw/the-seahorse) remains
+in its hardware repository.
 
-## Firmware baseline
+## Configuration and features
 
-The firmware uses official [ZMK v0.3.0](https://github.com/zmkfirmware/zmk/releases/tag/v0.3.0)
-at `edf5c0814fd3ea202e43aad2d68fd32e882a518c`, replacing the old
-`infused-kim` mouse/urob fork. The PS/2 module uses the
-[tails-dev adaptation](https://github.com/tails-dev/kb_zmk_ps2_mouse_trackpoint_driver)
-at `68acb29332fd6446181374227df4a8ea1b5d47a8` for compatibility with ZMK's
-official pointing APIs. It retains the existing UART TrackPoint wiring,
-axis inversion, movement-triggered mouse layer, and sensitivity controls.
+The active keymap is
+[`boards/shields/seahorse_v2/seahorse_v2.keymap`](boards/shields/seahorse_v2/seahorse_v2.keymap).
+The imported v2.1.0 keymap, physical layout, and TrackPoint setup are retained:
 
-The reusable GitHub workflow is pinned to a revision compatible with v0.3's
-Zephyr 3.5 board model. Updating the workflow to current development `main`
-can fail its newer board-metadata check after successfully compiling.
+- Alpha, Nav, Num, Mouse, Games, G-Right, G-Left, and misc layers, plus two
+  reserved layers for Studio.
+- Home-row modifiers, Hyper keys, gaming toggle, Bluetooth profile controls,
+  and the existing Studio Unlock binding.
+- Studio over USB on the central/right half, with saved keymap support and
+  the 34-key physical layout.
+- The right-side nice!view adapter and nice!view gem custom status screen.
+- UART TrackPoint on the original pins, sensitivity 100, 80 Hz sampling,
+  inverted X, disabled stick-clicking, temporary mouse-layer activation, input
+  scaling, and scrolling processors.
 
-The firmware favors split-link reliability, retaining the existing +8 dBm
-transmit power on both halves. Hardware testing is required to establish
-typing, TrackPoint, split-link, and battery behavior.
+The old `config/seahorse_v2.keymap`, `config/seahorse_v2.conf`, and their include
+files have been removed so they cannot override the imported shield keymap.
+The `config` directory now owns the dependency manifest; shield configuration
+and input processing live under `boards/shields/seahorse_v2`.
 
-## Split Bluetooth reliability
+## Bluetooth reliability
 
-The USB-connected right half is the central and owns the TrackPoint. Left-side
-keys still travel over Bluetooth between the halves. If left-side keys drop
-as the halves move apart while the right side continues working, test this
-split link first.
+Both halves retain +8 dBm transmit power and the existing experimental
+connection setting. The v2.1.0 baseline already disabled the 2 Mbps PHY via that
+setting; `CONFIG_BT_CTLR_PHY_2M=n` now makes that choice explicit on both halves.
 
-| Setting | Untuned v0.3.0 baseline | Reliability configuration |
-| --- | --- | --- |
-| Transmit power, both halves | +8 dBm | +8 dBm (retained) |
-| 2 Mbps PHY, both halves | Enabled | Disabled; use 1 Mbps |
-| Left outgoing key-state snapshot queue | 10 | 64 |
-| Right incoming key-transition queue | 5 | 64 |
-| Peripheral latency, negotiated by the right half | 30 | 4 |
-| Connection interval / supervision timeout | 7.5 ms / 4 s | 7.5 ms / 4 s (retained) |
+The additional tuning increases the left outgoing key-state queue from 10 to
+64 and the right incoming transition queue from 5 to 64. Peripheral latency is
+reduced from 30 to 4 while retaining the 7.5 ms connection interval and 4 s
+supervision timeout. A healthy idle link can therefore listen every 37.5 ms
+rather than 232.5 ms. This increases left-half idle power consumption; actual
+battery runtime must be measured. The right side can stay USB-powered.
 
-Reducing peripheral latency lets the left half skip fewer idle connection
-events: at most four rather than thirty. With a healthy link, that corresponds
-to idle listening every 37.5 ms rather than 232.5 ms. This increases left-half
-idle power consumption; measure actual battery runtime through a normal charge
-cycle. Lower idle latency is not a guarantee of faster active typing or longer
-range. Larger queues use RAM and absorb short processing/notification stalls;
-they do not preserve events through a sustained radio outage or disconnect.
+Queues absorb short processing stalls. They cannot preserve events through a
+sustained radio outage. Compare typing at fixed distances and orientations,
+including quick taps, chords, held-key releases, and TrackPoint movement.
+Build success does not establish physical range, input reliability, or battery
+runtime. See [ZMK's connection guidance](https://zmk.dev/docs/troubleshooting/connection-issues).
 
-Disabling 2 Mbps mode follows the radio change used by
-[ZMK's connection-stability option](https://zmk.dev/docs/config/bluetooth).
-The direct controller setting applies to both halves without enabling other
-experimental settings. See also
-[ZMK's weak-connection guidance](https://zmk.dev/docs/troubleshooting/connection-issues#unreliableweak-connection).
+## Build and flash
 
-## Note:
-This is ZMK for V2, check the releases for v1 releases if you a re using the original Seahorse.
+The build uses official [ZMK v0.3.0](https://github.com/zmkfirmware/zmk/releases/tag/v0.3.0).
+ZMK, the original badjeff PS/2 driver, zmk-helpers, and nice!view gem are pinned
+in [`config/west.yml`](config/west.yml). The small `ZMK_MOUSE` compatibility
+symbol maps the original PS/2 driver's legacy selection to ZMK's native pointing
+subsystem without replacing that driver's multi-device/settings implementation.
+The reusable workflow is pinned for the release's Zephyr 3.5 board model.
 
-# Flashing
-See [Flashing Guide](https://zmk.dev/docs/development/build-flash)
-## Local
-Run the following command in the zmk/app path
-```
-west build --pristine -b nice_nano_v2 -- -DSHIELD=seahorse_v2_right -DZMK_CONFIG="absolute/path/to/this/repo/config" -DZMK_EXTRA_MODULES="absolute/path/to/this/repo"
-```
-alternativly the `-s /path/to/zmk/app` flag can be added to be run anywhere
-```shell
-west build --pristine -s /path/to/zmk/app -b nice_nano_v2 -- -DSHIELD=seahorse_v2_left -DZMK_CONFIG="absolute/path/to/this/repo/config" -DZMK_EXTRA_MODULES="absolute/path/to/this/repo"
-```
-the above command generates a file in `zmk/app/build/zephyr/zmk.uf2`
-## Github
-Run the existing **build.yml** workflow from GitHub Actions. Download its
-`firmware` artifact after all three builds succeed.
+Run **Build ZMK firmware** in GitHub Actions. The existing two-half matrix
+includes the Studio USB snippet and nice!view shields on the right half.
+Download its `firmware` artifact and flash the matching image to each
+nice!nano v2 controller using its bootloader:
 
-### Update both halves
+- Left: `seahorse_v2_left-nice_nano_v2-zmk.uf2`
+- Right: `seahorse_v2_right-nice_nano_v2-zmk.uf2`
 
-Flash `seahorse_v2_left-nice_nano_v2-zmk.uf2` to the left controller and
-`seahorse_v2_right-nice_nano_v2-zmk.uf2` to the right controller using their
-bootloaders. Keep copies of your known-working firmware before upgrading.
-Start with the existing bonds; use the settings-reset image only if required
-by ZMK's pairing-recovery procedure, because it erases saved settings.
+Keep your known-working firmware. Start with the saved settings and bonds;
+do not erase settings as part of this update. Studio remaps stored on the
+device take precedence over the stock keymap. Avoid **Restore Stock Settings**
+unless you intend to discard those saved remaps.
 
-With the right half connected to the computer over USB, check:
+## Connect Studio
 
-- All 34 keys, held-key releases, layers, and home-row modifiers.
-- TrackPoint direction, automatic mouse-layer activation and timeout, mouse
-  buttons, keyboard scrolling, and the existing sensitivity-up/down bindings.
-- Left-half typing at a fixed separation, first while the TrackPoint is idle
-  and then while moving it; reconnecting after restarting either half.
+Connect the right half over USB and open [ZMK Studio](https://zmk.studio/) in a
+supported browser or its native app. Use the existing unlock binding: with the
+stock keymap, hold the Tab and Backspace thumb keys to activate **misc**, then
+press the physical **Z** key (leftmost key on the bottom letter row). The saved
+keymap may place that binding elsewhere if it was remapped in Studio.
 
-Compare this firmware against the untuned ZMK v0.3.0 baseline at the same
-separation and orientation. Include quick taps, chords, and held keys followed
-by releases; check for missing, repeated, or stuck keys. Repeat at increasing
-distances with the TrackPoint idle and moving. Successful compilation does not
-establish physical wireless range or battery runtime.
-
-If distance-dependent drops remain, compare antenna orientation and clearance
-from batteries, metal mounts, and nearby USB 3 equipment. Radio configuration
-cannot repair an obstructed or damaged antenna. A failure only during TrackPoint
-motion also warrants checking PS/2 interrupt load and wiring interference.
-
-## TRACKPOINT
-red trackpoint
-[Red Track point pinout](Red_Track_Point.png)
+Verify the complete layer set, key positions, saved changes across a reconnect,
+TrackPoint controls, and the nice!view screen on hardware after updating.

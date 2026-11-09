@@ -2,12 +2,13 @@ file_format: "1"
 id: seahorse_v2
 name: seahorse_v2
 type: shield
-url: https://github.com/nathansbradshaw/the-seahorse
+url: https://github.com/nathansbradshaw/zmk-the-seahorse
 requires: [pro_micro]
 exposes: [i2c_oled]
 features:
   - keys
   - display
+  - studio
 siblings:
   - seahorse_v2_left
   - seahorse_v2_right

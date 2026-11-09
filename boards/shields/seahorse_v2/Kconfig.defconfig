@@ -1,5 +1,12 @@
 
 # Central Side Configuration
+# Compatibility name selected by the pinned PS/2 module. Its native Zephyr
+# input driver feeds ZMK's current pointing subsystem; keep the driver's
+# existing multi-device, timing, and settings behavior.
+config ZMK_MOUSE
+	bool
+	select ZMK_POINTING
+
 #
 # The side on which the PS/2 mouse is connected MUST be the central side.
 #
@@ -12,7 +19,7 @@
 if SHIELD_SEAHORSE_V2_RIGHT
 
 	config ZMK_KEYBOARD_NAME
-		default "Seahorse v2.0.0"
+		default "Seahorse v2.1.0"
 
 	config ZMK_SPLIT_ROLE_CENTRAL
 		default y

@@ -1,0 +1,10 @@
+#define DEFAULT 0
+#define L_RIGHT 1
+#define L_LEFT 2
+#define MOUSE_TP 3
+#define GAME 4
+#define GAME_RIGHT 5
+#define GAME_LEFT 6
+#define MISC 7
+#define EXTRA1 8
+#define EXTRA2 9

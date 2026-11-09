@@ -2,21 +2,73 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: tails-dev
-      url-base: https://github.com/tails-dev
+    - name: urob
+      url-base: https://github.com/urob
+    - name: badjeff
+      url-base: https://github.com/badjeff
+    - name: nathansbradshaw
+      url-base: https://github.com/nathansbradshaw
 
   projects:
 
+    #
+    # zmk fork
+    # Uncomment only one of these...
+    #
+
+    # Official ZMK v0.3.0, pinned for reproducible builds.
     - name: zmk
       remote: zmkfirmware
-      # Official ZMK v0.3.0, the latest stable release.
       revision: edf5c0814fd3ea202e43aad2d68fd32e882a518c
       import: app/west.yml
 
-    # Mainline pointing-API adaptation of the original PS/2 UART driver.
+    # infused-kim's zmk fork with mouse PR, which might be a bit outdated, but
+    # is known to be compatible with the PS/2 mouse & TP driver module.
+    #- name: zmk
+    #  remote: infused-kim
+    #  revision: pr-testing/mouse_ps2_module_base
+    #  import: app/west.yml
+
+    # pete's zmk fork with the most up to date mouse PR, which is more
+    # up-to-date, but may contain incompatibilities with the PS/2 mouse & TP
+    # driver module.
+    # - name: zmk
+    #   remote: petejohanson
+    #   revision: feat/pointers-move-scroll
+    #   import: app/west.yml
+
+    # urob's zmk fork with mouse PR & many extra features, but may be
+    # incompatible with the PS/2 mouse & TP driver module.
+    # - name: zmk
+    #   remote: urob
+    #   revision: main
+    #   import: app/west.yml
+
+    # infused-kim's zmk fork with mouse PR AND urob's improvements, which
+    # might be out-dated, but is known to be compatible with PS/2 mouse & TP
+    # driver module.
+    # - name: zmk
+    #   remote: infused-kim
+    #   revision: pr-testing/mouse_ps2_module_base_urob
+    #   import: app/west.yml
+
+    #
+    # Additional zmk modules
+    #
+
+    # Module for PS/2 mouse & TP driver
     - name: kb_zmk_ps2_mouse_trackpoint_driver
-      remote: tails-dev
-      revision: 68acb29332fd6446181374227df4a8ea1b5d47a8
+      remote: badjeff
+      # Preserve the multi-device PS/2 implementation used by v2.1.0.
+      revision: 05b309d995bf9a7edcdc9cf641d5a2f20ce83fa1
+
+    - name: zmk-helpers
+      remote: urob
+      revision: f8d5ac771aed291ea54215bf1b6bc6f67336477d
+    
+    - name: nice-view-gem
+      remote: nathansbradshaw
+      revision: 3e94b8c3e462e070a56d022329d471cff7428f0e
 
   self:
     path: config
