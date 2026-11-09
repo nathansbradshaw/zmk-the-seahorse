@@ -27,6 +27,9 @@ The imported v2.1.0 keymap, physical layout, and TrackPoint setup are retained:
 - UART TrackPoint on the original pins, sensitivity 100, 80 Hz sampling,
   inverted X, disabled stick-clicking, temporary mouse-layer activation, input
   scaling, and scrolling processors.
+- The configured TrackPoint hardware reset pin is used at startup. The
+  [local input-driver correction](drivers/input/README.md) fixes an upstream
+  property-name typo that previously skipped that reset.
 
 The old `config/seahorse_v2.keymap` and its include files have been removed so
 they cannot override the imported shield keymap. The `config` directory owns
