@@ -1,0 +1,76 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
+#include <physical_layouts.dtsi>
+#include "loce_alda-layouts.dtsi"
+
+/ {
+	chosen {
+		zephyr,display = &oled;
+		zmk,kscan = &kscan0;
+		// zmk,matrix-transform = &default_transform;
+		zmk,physical-layout = &physical_layout0;
+	};
+	keypad_position_map {
+		compatible = "zmk,physical-layout-position-map";
+
+		physical_layout0 {
+			physical-layout = <&physical_layout0>;
+			positions = <>;
+		};
+	};
+
+	kscan0: kscan {
+		compatible = "zmk,kscan-gpio-matrix";
+		wakeup-source;
+
+		diode-direction = "col2row";
+        
+		col-gpios
+            = <&shift_reg 1 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 2 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 0 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 3 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 5 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 4 (GPIO_ACTIVE_HIGH)>
+            ;
+
+        row-gpios
+            = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
+	};
+};
+&xiao_i2c {
+	status = "okay";
+
+	oled: ssd1306@3c {
+		compatible = "solomon,ssd1306fb";
+		reg = <0x3c>;
+		width = <128>;
+		height = <32>;
+		segment-offset = <0>;
+		page-offset = <0>;
+		display-offset = <0>;
+		multiplex-ratio = <31>;
+		segment-remap;
+		com-invdir;
+		com-sequential;
+		inversion-on;
+		prechargep = <0x22>;
+	};
+};
+
+&xiao_spi {
+    status = "okay";
+    cs-gpios = <&xiao_d 7 GPIO_ACTIVE_LOW>;
+    shift_reg: 74HC595@0 {
+        compatible = "zmk,gpio-595";
+        status = "okay";
+        gpio-controller;
+        spi-max-frequency = <200000>;
+        reg = <0>;
+        #gpio-cells = <2>;
+        ngpios = <8>;
+    };
+};

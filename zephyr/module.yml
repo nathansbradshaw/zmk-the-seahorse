@@ -1,3 +1,5 @@
 build:
   settings:
-    board_root: .
+    # Default module for the repository-root build. Each exported version has
+    # its own zephyr/module.yml with board_root: . for standalone use.
+    board_root: firmware/v2
