@@ -20,6 +20,9 @@ dependencies inside that generation. A profile's `zephyr/module.yml` uses
 Only the repository-root module wrapper selects `firmware/v2` for the default
 build. Moving development to another generation should be an explicit change
 to these root entry points after its hardware and firmware are validated.
+The root automatic workflow watches only v2 and its build entry points, so
+documentation, archived v1, and experimental v3 edits do not spend v2 CI time.
+Manual dispatch remains available for the default v2 build.
 
 Released profiles pin compatible dependencies and their reusable build
 workflow. Legacy snapshots and experimental profiles retain their original
