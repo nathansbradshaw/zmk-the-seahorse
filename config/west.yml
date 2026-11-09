@@ -50,7 +50,8 @@ manifest:
     # driver module.
     - name: zmk
       remote: infused-kim
-      revision: pr-testing/mouse_ps2_module_base_urob
+      # Pin the existing TrackPoint-compatible fork for reproducible builds.
+      revision: 89bca8b37ebae7a26e22ed1b2b4b2e406b5e4bcc
       import: app/west.yml
 
     #
@@ -60,7 +61,7 @@ manifest:
     # Module for PS/2 mouse & TP driver
     - name: kb_zmk_ps2_mouse_trackpoint_driver
       remote: infused-kim
-      revision: main
+      revision: f6f3b30677caeccc4970bb48f48240d3504d03f7
 
   self:
     path: config
