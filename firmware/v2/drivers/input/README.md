@@ -5,10 +5,15 @@
 at commit `05b309d995bf9a7edcdc9cf641d5a2f20ce83fa1`. Its original copyright
 and Apache-2.0 SPDX header are retained; the license is in `Apache-2.0.txt`.
 
-The local change corrects three `DT_INST_NODE_HAS_PROP(n, rst_gpio)` checks
+The reset correction changes three `DT_INST_NODE_HAS_PROP(n, rst_gpio)` checks
 to `rst_gpios`, matching the actual `rst-gpios` binding/property. The old
 checks selected a null reset port even though the Seahorse config supplied
 one, so the power-on-reset function returned without driving the pin.
+
+The packet timeout is also initialized in the device initializer, before
+starting the initialization thread. Previously it was initialized after
+enabling callbacks/reporting, leaving a window where an early byte could
+cancel or schedule an uninitialized work item.
 
 The v2 module runs after the pinned PS/2 module and replaces only that input
 source in the application target. CMake fails if the expected upstream source

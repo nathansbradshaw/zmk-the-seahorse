@@ -1,6 +1,9 @@
 #include <zephyr/kernel.h>
 #include "util.h"
 #include <ctype.h>
+#if !IS_ENABLED(CONFIG_ZMK_SPLIT) || IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+#include "display_power.h"
+#endif
 
 void to_uppercase(char *str) {
     for (int i = 0; str[i] != '\0'; i++) {
@@ -21,6 +24,9 @@ void rotate_canvas(lv_obj_t *canvas, lv_color_t cbuf[]) {
     lv_canvas_fill_bg(canvas, LVGL_BACKGROUND, LV_OPA_COVER);
     lv_canvas_transform(canvas, &img, 900, LV_IMG_ZOOM_NONE, -1, 0, BUFFER_SIZE / 2,
                         BUFFER_SIZE / 2, false);
+#if !IS_ENABLED(CONFIG_ZMK_SPLIT) || IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+    seahorse_display_request_refresh();
+#endif
 }
 
 void fill_background(lv_obj_t *canvas) {

@@ -100,3 +100,15 @@ TrackPoint controls, and the nice!view screen on hardware after updating.
 [TrackPoint feel and battery research](docs/trackpoint-research.md) separates
 published findings, community reports, and source-level observations. The
 display update preserves current TrackPoint tuning and Bluetooth settings.
+
+## Right-side idle power and reliability
+
+The right display keeps its existing USB behavior, including the complete
+once-per-connection video. On battery it stops periodic display polling after
+30 seconds idle, retains the last picture, and flushes status changes when
+they arrive. Key or TrackPoint activity restores periodic updates. The
+sensor/receiver remain awake and right-side deep sleep stays disabled for
+immediate pointer response. Unused WPM collection is disabled.
+
+The input driver's packet timeout is initialized before callbacks can use it,
+closing a startup race. See [the implementation and validation notes](docs/power-and-reliability.md).
