@@ -2,6 +2,19 @@ name: Build ZMK firmware
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
+  display-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify animation codec and USB playback sessions
+        shell: bash
+        run: |
+          set -euo pipefail
+          task_tmp=$(mktemp -d)
+          trap 'rm -rf "$task_tmp"' EXIT
+          rustc --edition=2021 --test boards/shields/nice_view_gem/widgets/bad_apple_core.rs -o "$task_tmp/player-tests"
+          "$task_tmp/player-tests"
+          rustc --edition=2021 --test tools/pack_bad_apple.rs -o "$task_tmp/pack-tests"
+          "$task_tmp/pack-tests"
   build:
-    # ZMK v0.3 uses the Zephyr 3.5 board model (nice_nano_v2).
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@c25e927a2fae915e208a8777ce211a10c658e771
+    uses: ./.github/workflows/build-user-config.yml

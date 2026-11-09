@@ -21,6 +21,9 @@ The imported v2.1.0 keymap, physical layout, and TrackPoint setup are retained:
 - Studio over USB on the central/right half, with saved keymap support and
   the 34-key physical layout.
 - The right-side nice!view adapter and nice!view gem custom status screen.
+- The unused middle panel plays silent Bad Apple once per USB power
+  connection, stopping on unplug and clearing after playback. It stays
+  inactive on battery. See the [display implementation and regeneration guide](boards/shields/nice_view_gem/BAD_APPLE.md).
 - UART TrackPoint on the original pins, sensitivity 100, 80 Hz sampling,
   inverted X, disabled stick-clicking, temporary mouse-layer activation, input
   scaling, and scrolling processors.
@@ -56,11 +59,14 @@ runtime. See [ZMK's connection guidance](https://zmk.dev/docs/troubleshooting/co
 ## Build and flash
 
 The build uses official [ZMK v0.3.0](https://github.com/zmkfirmware/zmk/releases/tag/v0.3.0).
-ZMK, the original badjeff PS/2 driver, zmk-helpers, and nice!view gem are pinned
-in [`config/west.yml`](config/west.yml). The small `ZMK_MOUSE` compatibility
+ZMK, the original badjeff PS/2 driver, and zmk-helpers are pinned
+in [`config/west.yml`](config/west.yml). The nice!view gem source is maintained
+inside this profile, including its original license and pinned provenance.
+The small `ZMK_MOUSE` compatibility
 symbol maps the original PS/2 driver's legacy selection to ZMK's native pointing
 subsystem without replacing that driver's multi-device/settings implementation.
-The reusable workflow is pinned for the release's Zephyr 3.5 board model.
+The local reusable workflow preserves the pinned recipe for the release's
+Zephyr 3.5 board model and adds Rust 1.85.1 for the display's `no_std` decoder.
 
 Run **Build ZMK firmware** in GitHub Actions. The existing two-half matrix
 includes the Studio USB snippet and nice!view shields on the right half.
@@ -85,3 +91,9 @@ keymap may place that binding elsewhere if it was remapped in Studio.
 
 Verify the complete layer set, key positions, saved changes across a reconnect,
 TrackPoint controls, and the nice!view screen on hardware after updating.
+
+## TrackPoint research
+
+[TrackPoint feel and battery research](docs/trackpoint-research.md) separates
+published findings, community reports, and source-level observations. The
+display update preserves current TrackPoint tuning and Bluetooth settings.
