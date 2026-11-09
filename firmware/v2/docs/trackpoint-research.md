@@ -21,8 +21,9 @@ In `boards/shields/seahorse_v2/seahorse_v2_tpoint0_ps2.dtsi`, the `precise`
 and `scroll` overrides both match `MOUSE_TP`. Precision is declared first.
 [ZMK's documented rule](https://zmk.dev/docs/keymaps/input-processors/usage)
 is that the first matching override wins unless `process-next` is set. The
-pinned ZMK v0.3 implementation should be used to verify this exact path before
-an edit. This suggests the later scroll override can be unreachable. Both
+pinned [ZMK v0.3 implementation](https://github.com/zmkfirmware/zmk/blob/edf5c0814fd3ea202e43aad2d68fd32e882a518c/app/src/pointing/input_listener.c)
+confirms that early-return behavior. This suggests the later scroll override
+can be unreachable. Both
 overrides also bypass the parent's temporary-layer processor by default.
 This is an audit finding, not a claim that user-confirmed pointing is broken.
 No input processors or key bindings are changed by the display update.

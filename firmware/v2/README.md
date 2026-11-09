@@ -65,7 +65,8 @@ inside this profile, including its original license and pinned provenance.
 The small `ZMK_MOUSE` compatibility
 symbol maps the original PS/2 driver's legacy selection to ZMK's native pointing
 subsystem without replacing that driver's multi-device/settings implementation.
-The reusable workflow is pinned for the release's Zephyr 3.5 board model.
+The local reusable workflow preserves the pinned recipe for the release's
+Zephyr 3.5 board model and adds Rust 1.85.1 for the display's `no_std` decoder.
 
 Run **Build ZMK firmware** in GitHub Actions. The existing two-half matrix
 includes the Studio USB snippet and nice!view shields on the right half.

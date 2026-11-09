@@ -39,6 +39,7 @@ static void video_tick(lv_timer_t *unused) {
     ARG_UNUSED(unused);
     /* Recheck before touching pixels even if a USB display update is queued. */
     if (!session.powered || !zmk_usb_is_powered()) {
+        ba_session_power(&session, false, session.connection, k_uptime_get_32());
         lv_timer_pause(timer);
         clear_video();
         return;

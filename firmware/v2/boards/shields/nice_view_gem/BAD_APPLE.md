@@ -17,7 +17,7 @@ do not restart a completed playback while power stays present. Power-only
 chargers count too, provided the controller detects USB power.
 
 The video has 2,629 frames (about 3 minutes 39 seconds), compressed into
-265,551 bytes of flash. A bounded LZSS decoder uses a 4 KiB history and one
+265,551 bytes of flash. An allocation-free Rust LZSS decoder uses a 4 KiB history and one
 384-byte frame. Display callbacks decode at most three frames per tick to
 bound catch-up work. The animation timer is paused on battery and after
 completion. This does not change the existing display's global refresh or
@@ -60,16 +60,14 @@ comparing byte-for-byte regeneration (initial conversion: FFmpeg 8.1.2).
 
 ## Native verification
 
-These Rust tests call the actual production C codec and session controller.
+These Rust tests exercise the actual production Rust codec and session controller.
 From the v2 profile directory:
 
 ```sh
 task_tmp=$(mktemp -d)
 trap 'rm -rf "$task_tmp"' EXIT
-clang -std=c11 -Wall -Wextra -Werror \
-  -c boards/shields/nice_view_gem/widgets/bad_apple_codec.c -o "$task_tmp/codec.o"
-rustc --edition=2021 --test tools/test_bad_apple.rs \
-  -C "link-arg=$task_tmp/codec.o" -o "$task_tmp/player-tests"
+rustc --edition=2021 --test boards/shields/nice_view_gem/widgets/bad_apple_core.rs \
+  -o "$task_tmp/player-tests"
 "$task_tmp/player-tests"
 rustc --edition=2021 --test tools/pack_bad_apple.rs -o "$task_tmp/pack-tests"
 "$task_tmp/pack-tests"
@@ -80,3 +78,13 @@ frame boundaries, malformed/truncated input, uptime wrap, and once-per-USB
 connection behavior. Firmware CI also builds both halves. Hardware acceptance
 must still check orientation, playback, unplug/replug, and normal typing,
 TrackPoint, display indicators, and Studio while the animation runs.
+
+## Firmware toolchain
+
+Firmware CI uses the local copy of the previously pinned ZMK v0.3 build recipe
+and installs Rust 1.85.1 with `thumbv7em-none-eabi` for the right build. The
+root and standalone-profile recipes are identical and checked by CI. On a
+local ZMK development system, install that target with
+`rustup target add thumbv7em-none-eabi`; CMake invokes `rustc` directly to link
+the `no_std` static library. No Cargo dependencies or runtime allocation are
+needed. The existing C widget provides the LVGL drawing/event interface.

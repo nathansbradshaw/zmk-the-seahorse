@@ -11,7 +11,20 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_VIEW_WIDGET_STATUS)
   zephyr_library_sources(widgets/profile.c)
   zephyr_library_sources(widgets/screen.c)
   zephyr_library_sources(widgets/bad_apple.c)
-  zephyr_library_sources(widgets/bad_apple_codec.c)
+  # The LVGL widget stays C; allocation-free playback/decoding is Rust.
+  find_program(SEAHORSE_RUSTC rustc REQUIRED)
+  set(SEAHORSE_VIDEO_LIB ${CMAKE_CURRENT_BINARY_DIR}/libseahorse_video.a)
+  add_custom_command(
+    OUTPUT ${SEAHORSE_VIDEO_LIB}
+    COMMAND ${SEAHORSE_RUSTC} --edition=2021 --crate-name seahorse_video
+      --crate-type staticlib --target thumbv7em-none-eabi
+      -C panic=abort -C opt-level=z -C embed-bitcode=no
+      ${CMAKE_CURRENT_LIST_DIR}/widgets/bad_apple_core.rs -o ${SEAHORSE_VIDEO_LIB}
+    DEPENDS ${CMAKE_CURRENT_LIST_DIR}/widgets/bad_apple_core.rs
+    VERBATIM)
+  add_custom_target(seahorse_video_rust_build DEPENDS ${SEAHORSE_VIDEO_LIB})
+  zephyr_library_import(seahorse_video_rust ${SEAHORSE_VIDEO_LIB})
+  add_dependencies(seahorse_video_rust seahorse_video_rust_build)
   zephyr_library_sources(widgets/wpm.c)
   else()
     zephyr_library_sources(assets/crystal.c)

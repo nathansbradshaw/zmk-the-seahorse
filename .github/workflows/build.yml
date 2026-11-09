@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '.github/workflows/build.yml'
+      - '.github/workflows/build-user-config.yml'
       - 'firmware/v2/**'
       - 'config'
       - 'build.yaml'
@@ -10,6 +11,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/build.yml'
+      - '.github/workflows/build-user-config.yml'
       - 'firmware/v2/**'
       - 'config'
       - 'build.yaml'
@@ -26,13 +28,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          cmp ../../.github/workflows/build-user-config.yml .github/workflows/build-user-config.yml
           task_tmp=$(mktemp -d)
           trap 'rm -rf "$task_tmp"' EXIT
-          clang -std=c11 -Wall -Wextra -Werror -c boards/shields/nice_view_gem/widgets/bad_apple_codec.c -o "$task_tmp/codec.o"
-          rustc --edition=2021 --test tools/test_bad_apple.rs -C "link-arg=$task_tmp/codec.o" -o "$task_tmp/player-tests"
+          rustc --edition=2021 --test boards/shields/nice_view_gem/widgets/bad_apple_core.rs -o "$task_tmp/player-tests"
           "$task_tmp/player-tests"
           rustc --edition=2021 --test tools/pack_bad_apple.rs -o "$task_tmp/pack-tests"
           "$task_tmp/pack-tests"
   build:
-    # ZMK v0.3 uses the Zephyr 3.5 board model (nice_nano_v2).
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@c25e927a2fae915e208a8777ce211a10c658e771
+    # Pinned ZMK v0.3 recipe, with the Rust display toolchain installed.
+    uses: ./.github/workflows/build-user-config.yml

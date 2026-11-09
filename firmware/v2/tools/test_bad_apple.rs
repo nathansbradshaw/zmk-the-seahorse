@@ -1,36 +1,6 @@
-//! Native Rust tests call the same C decoder/session code that runs on-device.
+//! Tests of the same Rust decoder/session code that runs on-device.
 //! See ../boards/shields/nice_view_gem/BAD_APPLE.md for the build commands.
-use std::ffi::c_uchar;
-
-#[repr(C)]
-struct Decoder {
-    history: [u8; 4096],
-    offset: usize,
-    produced: u32,
-    distance: u16,
-    remaining: u8,
-    flags: u8,
-    bits: u8,
-}
-#[repr(C)]
-#[derive(Default)]
-struct Session {
-    connection: u32,
-    started_ms: u32,
-    powered: bool,
-    finished: bool,
-}
-extern "C" {
-    fn ba_decode(
-        d: *mut Decoder,
-        data: *const c_uchar,
-        length: usize,
-        output: *mut c_uchar,
-        count: usize,
-    ) -> bool;
-    fn ba_session_power(s: *mut Session, powered: bool, connection: u32, now: u32) -> bool;
-    fn ba_due_frame(s: *const Session, now: u32, fps: u32) -> u32;
-}
+use super::{ba_decode, ba_due_frame, ba_session_power, Decoder, Session};
 fn decoder() -> Decoder {
     unsafe { std::mem::zeroed() }
 }
