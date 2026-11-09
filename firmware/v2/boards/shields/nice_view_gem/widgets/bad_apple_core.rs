@@ -7,7 +7,7 @@ pub struct Decoder {
     offset: usize,
     produced: u32,
     distance: u16,
-    remaining: u8,
+    remaining: u16,
     flags: u8,
     bits: u8,
 }
@@ -72,7 +72,14 @@ pub unsafe extern "C" fn ba_decode(
             let token = u16::from_le_bytes([low, high]);
             d.offset += 2;
             d.distance = (token >> 4) + 1;
-            d.remaining = (token as u8 & 15) + 3;
+            d.remaining = (token & 15) + 3;
+            if d.remaining == 18 {
+                let Some(&extension) = input.get(d.offset) else {
+                    return false;
+                };
+                d.offset += 1;
+                d.remaining += extension as u16;
+            }
             if d.distance as u32 > d.produced {
                 return false;
             }

@@ -8,7 +8,7 @@ mutable display repository. The original battery, connection, profile, and
 layer widgets are retained.
 
 The central/right middle panel plays the full silent Bad Apple silhouette
-video, centered at 64×48 pixels, at 12 frames per second. Playback starts
+video, centered at 56×42 pixels, at 12 frames per second. Playback starts
 when USB power becomes available, runs once, then clears the panel. Unplugging
 stops and clears it; the next connection starts from the beginning. Starting
 the keyboard while already plugged in also counts as a connection. USB
@@ -17,8 +17,8 @@ do not restart a completed playback while power stays present. Power-only
 chargers count too, provided the controller detects USB power.
 
 The video has 2,629 frames (about 3 minutes 39 seconds), compressed into
-265,551 bytes of flash. An allocation-free Rust LZSS decoder uses a 4 KiB history and one
-384-byte frame. Display callbacks decode at most three frames per tick to
+191,264 bytes of flash. An allocation-free Rust LZSS decoder uses a 4 KiB history and one
+294-byte frame. Matches up to 273 bytes compress long background runs. Display callbacks decode at most three frames per tick to
 bound catch-up work. The animation timer is paused on battery and after
 completion. This does not change the existing display's global refresh or
 idle policy. No audio, USB streaming, logging transport, or keymap bindings
@@ -39,7 +39,7 @@ commit `7b04ba8eb92b778c14ddc378620ada59da0e5aed`.
 Its SHA-256 is
 `d8f21232313506da4f8d631ca289793bcf2f0a33440d68ccb02f4ac52e963cd0`.
 The generated compressed stream's SHA-256 is
-`e41c01ed9e085f95786d43604386fd2ec9401654f36e418eca9392d0c2a79edc`.
+`e77f7b3b89df8a5e5fd3922dfb7abcc6d092d44f645ac8e3c83199f75c3cc769`.
 The source MP4 is not needed when building firmware.
 
 From the v2 profile directory, with Rust and FFmpeg installed:
@@ -47,7 +47,7 @@ From the v2 profile directory, with Rust and FFmpeg installed:
 ```sh
 rustc --edition=2021 -O tools/pack_bad_apple.rs -o /private/tmp/pack_bad_apple
 ffmpeg -v error -i bad-apple.mp4 -an \
-  -vf 'fps=12,scale=64:48:flags=lanczos' -pix_fmt gray -f rawvideo \
+  -vf 'fps=12,scale=56:42:flags=lanczos' -pix_fmt gray -f rawvideo \
   /private/tmp/bad-apple.gray
 /private/tmp/pack_bad_apple boards/shields/nice_view_gem/assets < /private/tmp/bad-apple.gray
 ```
@@ -89,3 +89,16 @@ local ZMK development system, install that target with
 the target matching Zephyr's `CONFIG_FP_HARDABI` and invokes `rustc` directly to link
 the `no_std` static library. No Cargo dependencies or runtime allocation are
 needed. The existing C widget provides the LVGL drawing/event interface.
+
+## Installed bootloader compatibility
+
+The installed nice!nano bootloader is 0.5.0. Its
+[`USER_FLASH_END`](https://github.com/adafruit/Adafruit_nRF52_Bootloader/blob/0.5.0/src/usb/uf2/uf2cfg.h)
+is `0xAD000`; it rejects higher writes and never counts a larger UF2 transfer
+as complete. This is stricter than ZMK's default 792 KiB application partition.
+The right overlay now limits code to `0x26000..0xAD000` (540 KiB), so an
+oversized image fails at link time. Settings/bond storage is unchanged.
+
+The initial 64×48 image exceeded that limit and did not restart the board.
+The compatible asset uses 56×42 with longer match compression, retaining the
+full clip and 12 fps. No bootloader upgrade is required or performed.

@@ -22,3 +22,10 @@
 };
 
 #include "seahorse_v2_tpoint0_ps2.dtsi"
+
+/* Installed nice!nano bootloader 0.5.0 rejects writes at/above 0xAD000.
+ * Enforce its real application limit at link time; settings stay unchanged.
+ */
+&code_partition {
+    reg = <0x26000 0x87000>;
+};
