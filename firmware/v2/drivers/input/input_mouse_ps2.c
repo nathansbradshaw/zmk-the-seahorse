@@ -1981,7 +1981,7 @@ DT_INST_FOREACH_STATUS_OKAY(PS2_MOUSE_CALLBACK_DEFINE)
             ({ .port = NULL, .pin = 0, .dt_flags = 0, })),                                    \
         .rst_gpio_port_num = COND_CODE_1(                                                     \
             DT_INST_NODE_HAS_PROP(n, rst_gpios),                                              \
-            (DT_PROP(DT_INST_GPIO_CTLR(n, rst_gpios), port)),                                 \
+            (DT_PROP(DT_INST_PHANDLE(n, rst_gpios), port)),                                   \
             (0)),                                                                             \
         .scroll_mode = DT_INST_PROP_OR(n, scroll_mode, false),                                \
         .disable_clicking = DT_INST_PROP_OR(n, disable_clicking, false),                      \

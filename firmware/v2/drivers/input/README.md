@@ -9,8 +9,6 @@ The local change corrects three `DT_INST_NODE_HAS_PROP(n, rst_gpio)` checks
 to `rst_gpios`, matching the actual `rst-gpios` binding/property. The old
 checks selected a null reset port even though the Seahorse config supplied
 one, so the power-on-reset function returned without driving the pin.
-The diagnostic port number also uses `DT_INST_GPIO_CTLR`, following the
-Pro Micro GPIO mapping to the actual nRF controller.
 
 The v2 module runs after the pinned PS/2 module and replaces only that input
 source in the application target. CMake fails if the expected upstream source
