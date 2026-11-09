@@ -1,0 +1,5 @@
+config SHIELD_LOCE_ALDA_LEFT
+	def_bool $(shields_list_contains,loce_alda_left)
+
+config SHIELD_LOCE_ALDA_RIGHT
+	def_bool $(shields_list_contains,loce_alda_right)

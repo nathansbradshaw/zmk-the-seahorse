@@ -1,0 +1,11 @@
+/*
+ * Copyright (c) 2020 Pete Johanson
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "loce_alda.dtsi"
+    &default_transform0 {
+        col-offset = <6>;
+    };
+// #include "loce_alda_tpoint0_ps2.dtsi"

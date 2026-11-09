@@ -1,82 +1,33 @@
-# Seahorse v2.1.0 firmware
+# Seahorse firmware
 
-This is the maintained Seahorse firmware repository. It combines the original
-`zmk-the-seahorse` history with the deployed v2.1.0 configuration from
-[`zmk-seahorse-config`](https://github.com/nathansbradshaw/zmk-seahorse-config)
-at `419d09b184cee938bf4dffc09b12a96de93c367b`. Both Git histories are preserved.
-The [keyboard hardware](https://github.com/nathansbradshaw/the-seahorse) remains
-in its hardware repository.
+One maintained firmware repository for the Seahorse family. The former
+`zmk-seahorse-config` history is merged here; build and develop firmware here.
+The [hardware repository](https://github.com/nathansbradshaw/the-seahorse)
+continues to hold PCB and mechanical designs.
 
-## Configuration and features
+| Generation | Project | Status | Source and instructions |
+| --- | --- | --- | --- |
+| v1 | Original Seahorse | Frozen legacy v1.1.0; no active users | [firmware/v1](firmware/v1/README.md) |
+| v2 | Seahorse v2.1.0 | Active/default build, Studio + TrackPoint + nice!view | [firmware/v2](firmware/v2/README.md) |
+| v3 | Loce Alda | Experimental development | [firmware/v3](firmware/v3/README.md) |
 
-The active keymap is
-[`boards/shields/seahorse_v2/seahorse_v2.keymap`](boards/shields/seahorse_v2/seahorse_v2.keymap).
-The imported v2.1.0 keymap, physical layout, and TrackPoint setup are retained:
+Each generation is a standalone ZMK project containing its own `boards`,
+`config/west.yml`, `build.yaml`, `zephyr/module.yml`, and build workflow.
+See the [version guide](docs/firmware-versions.md) for source provenance,
+export commands, and the standard for future generations.
 
-- Alpha, Nav, Num, Mouse, Games, G-Right, G-Left, and misc layers, plus two
-  reserved layers for Studio.
-- Home-row modifiers, Hyper keys, gaming toggle, Bluetooth profile controls,
-  and the existing Studio Unlock binding.
-- Studio over USB on the central/right half, with saved keymap support and
-  the 34-key physical layout.
-- The right-side nice!view adapter and nice!view gem custom status screen.
-- UART TrackPoint on the original pins, sensitivity 100, 80 Hz sampling,
-  inverted X, disabled stick-clicking, temporary mouse-layer activation, input
-  scaling, and scrolling processors.
+## Default build
 
-The old `config/seahorse_v2.keymap`, `config/seahorse_v2.conf`, and their include
-files have been removed so they cannot override the imported shield keymap.
-The `config` directory now owns the dependency manifest; shield configuration
-and input processing live under `boards/shields/seahorse_v2`.
+Run **Build ZMK firmware** in GitHub Actions. It builds the active **v2** left
+and right halves, including Studio and the right-side nice!view gem screen.
+The root `config` and `build.yaml` links select `firmware/v2`; the root module
+metadata points Zephyr at that version's boards. These entry points preserve
+the existing ZMK build workflow while keeping versioned source separate.
 
-## Bluetooth reliability
+Use the instructions in [firmware/v2](firmware/v2/README.md) to flash and test.
+The current v2 keymap, its Studio unlock key, and all eight populated plus two
+reserved layers come from the actual v2.1.0 config. Shared radio settings are
+now loaded from the active config, with the Bluetooth queue/latency tuning.
 
-Both halves retain +8 dBm transmit power and the existing experimental
-connection setting. The v2.1.0 baseline already disabled the 2 Mbps PHY via that
-setting; `CONFIG_BT_CTLR_PHY_2M=n` now makes that choice explicit on both halves.
-
-The additional tuning increases the left outgoing key-state queue from 10 to
-64 and the right incoming transition queue from 5 to 64. Peripheral latency is
-reduced from 30 to 4 while retaining the 7.5 ms connection interval and 4 s
-supervision timeout. A healthy idle link can therefore listen every 37.5 ms
-rather than 232.5 ms. This increases left-half idle power consumption; actual
-battery runtime must be measured. The right side can stay USB-powered.
-
-Queues absorb short processing stalls. They cannot preserve events through a
-sustained radio outage. Compare typing at fixed distances and orientations,
-including quick taps, chords, held-key releases, and TrackPoint movement.
-Build success does not establish physical range, input reliability, or battery
-runtime. See [ZMK's connection guidance](https://zmk.dev/docs/troubleshooting/connection-issues).
-
-## Build and flash
-
-The build uses official [ZMK v0.3.0](https://github.com/zmkfirmware/zmk/releases/tag/v0.3.0).
-ZMK, the original badjeff PS/2 driver, zmk-helpers, and nice!view gem are pinned
-in [`config/west.yml`](config/west.yml). The small `ZMK_MOUSE` compatibility
-symbol maps the original PS/2 driver's legacy selection to ZMK's native pointing
-subsystem without replacing that driver's multi-device/settings implementation.
-The reusable workflow is pinned for the release's Zephyr 3.5 board model.
-
-Run **Build ZMK firmware** in GitHub Actions. The existing two-half matrix
-includes the Studio USB snippet and nice!view shields on the right half.
-Download its `firmware` artifact and flash the matching image to each
-nice!nano v2 controller using its bootloader:
-
-- Left: `seahorse_v2_left-nice_nano_v2-zmk.uf2`
-- Right: `seahorse_v2_right-nice_nano_v2-zmk.uf2`
-
-Keep your known-working firmware. Start with the saved settings and bonds;
-do not erase settings as part of this update. Studio remaps stored on the
-device take precedence over the stock keymap. Avoid **Restore Stock Settings**
-unless you intend to discard those saved remaps.
-
-## Connect Studio
-
-Connect the right half over USB and open [ZMK Studio](https://zmk.studio/) in a
-supported browser or its native app. Use the existing unlock binding: with the
-stock keymap, hold the Tab and Backspace thumb keys to activate **misc**, then
-press the physical **Z** key (leftmost key on the bottom letter row). The saved
-keymap may place that binding elsewhere if it was remapped in Studio.
-
-Verify the complete layer set, key positions, saved changes across a reconnect,
-TrackPoint controls, and the nice!view screen on hardware after updating.
+Legacy v1 and experimental v3 are excluded from the default build. Their
+source and histories remain available for independent use and development.
