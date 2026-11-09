@@ -1,11 +1,11 @@
-//! Dependency-free 64x48 / 12 fps gray8 -> monochrome LZSS converter.
+//! Dependency-free 56x42 / 12 fps gray8 -> monochrome LZSS converter.
 use std::{
     collections::HashMap,
     env, fs,
     io::{self, Read, Write},
 };
-const WIDTH: usize = 64;
-const HEIGHT: usize = 48;
+const WIDTH: usize = 56;
+const HEIGHT: usize = 42;
 
 fn encode(input: &[u8]) -> Vec<u8> {
     let mut dict: HashMap<[u8; 3], Vec<usize>> = HashMap::new();
@@ -27,7 +27,7 @@ fn encode(input: &[u8]) -> Vec<u8> {
                             break;
                         }
                         let mut count = 3;
-                        while count < 18
+                        while count < 273
                             && pos + count < input.len()
                             && input[old + count] == input[pos + count]
                         {
@@ -36,7 +36,7 @@ fn encode(input: &[u8]) -> Vec<u8> {
                         if count > best.0 {
                             best = (count, pos - old);
                         }
-                        if count == 18 {
+                        if count == 273 {
                             break;
                         }
                     }
@@ -44,8 +44,11 @@ fn encode(input: &[u8]) -> Vec<u8> {
             }
             let advance;
             if best.0 >= 3 {
-                let token = (((best.1 - 1) << 4) | (best.0 - 3)) as u16;
+                let token = (((best.1 - 1) << 4) | (best.0 - 3).min(15)) as u16;
                 output.extend_from_slice(&token.to_le_bytes());
+                if best.0 >= 18 {
+                    output.push((best.0 - 18) as u8);
+                }
                 advance = best.0;
             } else {
                 output[flag_pos] |= 1 << bit;
@@ -86,7 +89,11 @@ fn decode(input: &[u8], length: usize) -> Option<Vec<u8>> {
                 let token = u16::from_le_bytes([*input.get(pos)?, *input.get(pos + 1)?]) as usize;
                 pos += 2;
                 let distance = (token >> 4) + 1;
-                let count = (token & 15) + 3;
+                let mut count = (token & 15) + 3;
+                if count == 18 {
+                    count += *input.get(pos)? as usize;
+                    pos += 1;
+                }
                 if distance > output.len() || output.len() + count > length {
                     return None;
                 }

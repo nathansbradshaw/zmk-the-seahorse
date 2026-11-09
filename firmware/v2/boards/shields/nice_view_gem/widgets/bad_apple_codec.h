@@ -10,7 +10,7 @@ struct ba_decoder {
     size_t offset;
     uint32_t produced;
     uint16_t distance;
-    uint8_t remaining;
+    uint16_t remaining;
     uint8_t flags;
     uint8_t bits;
 };

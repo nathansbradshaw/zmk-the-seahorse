@@ -57,7 +57,7 @@ fn invalid_and_truncated_streams_fail_closed() {
 #[test]
 fn overlapping_match_can_cross_frame_boundary() {
     // One literal followed by an 18-byte, distance-one overlapping copy.
-    let stream = [1, 0x96, 15, 0];
+    let stream = [1, 0x96, 15, 0, 0];
     let mut d = decoder();
     let mut output = [0; 7];
     assert!(decode(&mut d, &stream, &mut output));
@@ -65,6 +65,14 @@ fn overlapping_match_can_cross_frame_boundary() {
     let mut rest = [0; 12];
     assert!(decode(&mut d, &stream, &mut rest));
     assert_eq!(rest, [0x96; 12]);
+}
+
+#[test]
+fn maximum_length_match_and_truncated_extension() {
+    let mut output = [0; 274];
+    assert!(decode(&mut decoder(), &[1, 0x96, 15, 0, 255], &mut output));
+    assert_eq!(output, [0x96; 274]);
+    assert!(!decode(&mut decoder(), &[1, 0x96, 15, 0], &mut [0; 2]));
 }
 
 #[test]
@@ -79,11 +87,11 @@ fn entire_embedded_video_decodes_through_production_codec() {
                 .and_then(|h| u8::from_str_radix(h, 16).ok())
         })
         .collect();
-    assert_eq!(data.len(), 265551);
+    assert_eq!(data.len(), 191264);
     let mut d = decoder();
     let mut hash = 0xcbf29ce484222325u64;
     for _ in 0..2629 {
-        let mut frame = [0; 64 * 48 / 8];
+        let mut frame = [0; 56 * 42 / 8];
         assert!(decode(&mut d, &data, &mut frame));
         hash = frame
             .iter()
@@ -91,5 +99,5 @@ fn entire_embedded_video_decodes_through_production_codec() {
     }
     assert_eq!(d.offset, data.len());
     assert_eq!(d.remaining, 0);
-    assert_eq!(hash, 0x2428ef09e5d01adf);
+    assert_eq!(hash, 0xa7596e010312d4ee);
 }
