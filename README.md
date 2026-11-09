@@ -53,6 +53,9 @@ without enabling its other experimental changes. See also
 
 ZMK and the PS/2 driver are pinned to the existing compatible upstream commits;
 this change does not migrate the TrackPoint to a newer ZMK pointing stack.
+The reusable GitHub build workflow is also pinned to support this fork's
+Zephyr 3.5 board model. Newer workflow revisions assume newer board metadata
+and can fail after compilation, before uploading the firmware.
 
 ### Flash and compare
 
