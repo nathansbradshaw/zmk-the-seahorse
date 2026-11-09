@@ -17,6 +17,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  display-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify animation codec and USB playback sessions
+        working-directory: firmware/v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          task_tmp=$(mktemp -d)
+          trap 'rm -rf "$task_tmp"' EXIT
+          clang -std=c11 -Wall -Wextra -Werror -c boards/shields/nice_view_gem/widgets/bad_apple_codec.c -o "$task_tmp/codec.o"
+          rustc --edition=2021 --test tools/test_bad_apple.rs -C "link-arg=$task_tmp/codec.o" -o "$task_tmp/player-tests"
+          "$task_tmp/player-tests"
+          rustc --edition=2021 --test tools/pack_bad_apple.rs -o "$task_tmp/pack-tests"
+          "$task_tmp/pack-tests"
   build:
     # ZMK v0.3 uses the Zephyr 3.5 board model (nice_nano_v2).
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@c25e927a2fae915e208a8777ce211a10c658e771

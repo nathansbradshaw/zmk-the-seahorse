@@ -66,9 +66,7 @@ manifest:
       remote: urob
       revision: f8d5ac771aed291ea54215bf1b6bc6f67336477d
     
-    - name: nice-view-gem
-      remote: nathansbradshaw
-      revision: 3e94b8c3e462e070a56d022329d471cff7428f0e
+    # nice_view_gem is maintained with this profile under boards/shields/.
 
   self:
     path: config
