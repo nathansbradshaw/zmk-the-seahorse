@@ -18,13 +18,11 @@
  * to edit the entire keymap file manually every time.
  */
  
-#define HAS_UROB
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
 
 #ifdef HAS_MOUSE_KEYS
-  #include <dt-bindings/zmk/mouse.h>
-  #include <behaviors/mouse_keys.dtsi>
+  #include <dt-bindings/zmk/pointing.h>
 #endif
 
 #ifdef HAS_MOUSE_TP
@@ -58,7 +56,7 @@
             flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <180>;
-            global-quick-tap;
+            require-prior-idle-ms = <180>;
             bindings = <&kp>, <&kp>;
         };
     };

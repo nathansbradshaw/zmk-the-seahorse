@@ -2,66 +2,21 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: infused-kim
-      url-base: https://github.com/infused-kim
-    - name: petejohanson
-      url-base: https://github.com/petejohanson
-    - name: urob
-      url-base: https://github.com/urob
+    - name: tails-dev
+      url-base: https://github.com/tails-dev
 
   projects:
 
-    #
-    # zmk fork
-    # Uncomment only one of these...
-    #
-
-    # Standard, stable zmk repo without mouse PR.
-    # Not compatible with the PS/2 mouse & TP driver module.
-    # - name: zmk
-    #   remote: zmkfirmware
-    #   revision: main
-    #   import: app/west.yml
-
-    # infused-kim's zmk fork with mouse PR, which might be a bit outdated, but
-    # is known to be compatible with the PS/2 mouse & TP driver module.
-    # - name: zmk
-    #   remote: infused-kim
-    #   revision: pr-testing/mouse_ps2_module_base
-    #   import: app/west.yml
-
-    # pete's zmk fork with the most up to date mouse PR, which is more
-    # up-to-date, but may contain incompatibilities with the PS/2 mouse & TP
-    # driver module.
-    # - name: zmk
-    #   remote: petejohanson
-    #   revision: feat/pointers-move-scroll
-    #   import: app/west.yml
-
-    # urob's zmk fork with mouse PR & many extra features, but may be
-    # incompatible with the PS/2 mouse & TP driver module.
-    # - name: zmk
-    #   remote: urob
-    #   revision: main
-    #   import: app/west.yml
-
-    # infused-kim's zmk fork with mouse PR AND urob's improvements, which
-    # might be out-dated, but is known to be compatible with PS/2 mouse & TP
-    # driver module.
     - name: zmk
-      remote: infused-kim
-      # Pin the existing TrackPoint-compatible fork for reproducible builds.
-      revision: 89bca8b37ebae7a26e22ed1b2b4b2e406b5e4bcc
+      remote: zmkfirmware
+      # Official ZMK v0.3.0, the latest stable release.
+      revision: edf5c0814fd3ea202e43aad2d68fd32e882a518c
       import: app/west.yml
 
-    #
-    # Additional zmk modules
-    #
-
-    # Module for PS/2 mouse & TP driver
+    # Mainline pointing-API adaptation of the original PS/2 UART driver.
     - name: kb_zmk_ps2_mouse_trackpoint_driver
-      remote: infused-kim
-      revision: f6f3b30677caeccc4970bb48f48240d3504d03f7
+      remote: tails-dev
+      revision: 68acb29332fd6446181374227df4a8ea1b5d47a8
 
   self:
     path: config

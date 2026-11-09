@@ -2,6 +2,5 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    # This TrackPoint fork uses Zephyr 3.5 and the nice_nano_v2 board name.
-    # Keep its build recipe compatible with that board model.
+    # ZMK v0.3 uses the Zephyr 3.5 board model (nice_nano_v2).
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@c25e927a2fae915e208a8777ce211a10c658e771

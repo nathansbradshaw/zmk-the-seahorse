@@ -2,7 +2,56 @@
 Firmware for the sea horse pcb based on the Ferris Sweep
 The board can be found here: https://github.com/nathansbradshaw/the-seahorse
 
-V2 has a trackpoint and therefore needs special setup if building locally
+V2 has a TrackPoint and uses the PS/2 UART driver module pinned in
+[`config/west.yml`](config/west.yml).
+
+## Firmware baseline
+
+The firmware uses official [ZMK v0.3.0](https://github.com/zmkfirmware/zmk/releases/tag/v0.3.0)
+at `edf5c0814fd3ea202e43aad2d68fd32e882a518c`, replacing the old
+`infused-kim` mouse/urob fork. The PS/2 module uses the
+[tails-dev adaptation](https://github.com/tails-dev/kb_zmk_ps2_mouse_trackpoint_driver)
+at `68acb29332fd6446181374227df4a8ea1b5d47a8` for compatibility with ZMK's
+official pointing APIs. It retains the existing UART TrackPoint wiring,
+axis inversion, movement-triggered mouse layer, and sensitivity controls.
+
+The reusable GitHub workflow is pinned to a revision compatible with v0.3's
+Zephyr 3.5 board model. Updating the workflow to current development `main`
+can fail its newer board-metadata check after successfully compiling.
+
+The firmware favors split-link reliability, retaining the existing +8 dBm
+transmit power on both halves. Hardware testing is required to establish
+typing, TrackPoint, split-link, and battery behavior.
+
+## Split Bluetooth reliability
+
+The USB-connected right half is the central and owns the TrackPoint. Left-side
+keys still travel over Bluetooth between the halves. If left-side keys drop
+as the halves move apart while the right side continues working, test this
+split link first.
+
+| Setting | Untuned v0.3.0 baseline | Reliability configuration |
+| --- | --- | --- |
+| Transmit power, both halves | +8 dBm | +8 dBm (retained) |
+| 2 Mbps PHY, both halves | Enabled | Disabled; use 1 Mbps |
+| Left outgoing key-state snapshot queue | 10 | 64 |
+| Right incoming key-transition queue | 5 | 64 |
+| Peripheral latency, negotiated by the right half | 30 | 4 |
+| Connection interval / supervision timeout | 7.5 ms / 4 s | 7.5 ms / 4 s (retained) |
+
+Reducing peripheral latency lets the left half skip fewer idle connection
+events: at most four rather than thirty. With a healthy link, that corresponds
+to idle listening every 37.5 ms rather than 232.5 ms. This increases left-half
+idle power consumption; measure actual battery runtime through a normal charge
+cycle. Lower idle latency is not a guarantee of faster active typing or longer
+range. Larger queues use RAM and absorb short processing/notification stalls;
+they do not preserve events through a sustained radio outage or disconnect.
+
+Disabling 2 Mbps mode follows the radio change used by
+[ZMK's connection-stability option](https://zmk.dev/docs/config/bluetooth).
+The direct controller setting applies to both halves without enabling other
+experimental settings. See also
+[ZMK's weak-connection guidance](https://zmk.dev/docs/troubleshooting/connection-issues#unreliableweak-connection).
 
 ## Note:
 This is ZMK for V2, check the releases for v1 releases if you a re using the original Seahorse.
@@ -12,73 +61,44 @@ See [Flashing Guide](https://zmk.dev/docs/development/build-flash)
 ## Local
 Run the following command in the zmk/app path
 ```
-west build --pristine -b nice_nano_v2 -- -DSHIELD=blaster_pad -DZMK_EXTRA_MODULES="absolute/path/to/this/repo"
+west build --pristine -b nice_nano_v2 -- -DSHIELD=seahorse_v2_right -DZMK_CONFIG="absolute/path/to/this/repo/config" -DZMK_EXTRA_MODULES="absolute/path/to/this/repo"
 ```
 alternativly the `-s /path/to/zmk/app` flag can be added to be run anywhere
 ```shell
-west build --pristine -b nice_nano_v2 -- -DSHIELD=blaster_pad -DZMK_EXTRA_MODULES="absolute/path/to/this/repo" -s /path/to/zmk/app
+west build --pristine -s /path/to/zmk/app -b nice_nano_v2 -- -DSHIELD=seahorse_v2_left -DZMK_CONFIG="absolute/path/to/this/repo/config" -DZMK_EXTRA_MODULES="absolute/path/to/this/repo"
 ```
 the above command generates a file in `zmk/app/build/zephyr/zmk.uf2`
 ## Github
-fork this repo
+Run the existing **build.yml** workflow from GitHub Actions. Download its
+`firmware` artifact after all three builds succeed.
 
-## TRACKPOINT
-red trackpoint
-[Red Track point pinout](Red_Track_Point.png)
+### Update both halves
 
-## Split Bluetooth reliability
+Flash `seahorse_v2_left-nice_nano_v2-zmk.uf2` to the left controller and
+`seahorse_v2_right-nice_nano_v2-zmk.uf2` to the right controller using their
+bootloaders. Keep copies of your known-working firmware before upgrading.
+Start with the existing bonds; use the settings-reset image only if required
+by ZMK's pairing-recovery procedure, because it erases saved settings.
 
-The right half is the central and owns the TrackPoint. With the right half
-connected to the computer over USB, left-side keys still travel over Bluetooth
-between the halves. If only left-side keys drop as the halves move apart, test
-this split link first.
+With the right half connected to the computer over USB, check:
 
-The firmware favors reliability while retaining some idle power saving:
+- All 34 keys, held-key releases, layers, and home-row modifiers.
+- TrackPoint direction, automatic mouse-layer activation and timeout, mouse
+  buttons, keyboard scrolling, and the existing sensitivity-up/down bindings.
+- Left-half typing at a fixed separation, first while the TrackPoint is idle
+  and then while moving it; reconnecting after restarting either half.
 
-| Setting | Left half | Right half |
-| --- | --- | --- |
-| Radio transmit power | +8 dBm (already enabled previously) | +8 dBm (already enabled previously) |
-| 2 Mbps PHY | Disabled; use 1 Mbps | Disabled; use 1 Mbps |
-| Split key-event queue | 64 outgoing snapshots (previously 10) | 64 incoming transitions (previously 5) |
-| Split connection parameters | Negotiated by the right half | 7.5 ms interval, latency 4 (previously 30), 4 s supervision timeout |
+Compare this firmware against the untuned ZMK v0.3.0 baseline at the same
+separation and orientation. Include quick taps, chords, and held keys followed
+by releases; check for missing, repeated, or stuck keys. Repeat at increasing
+distances with the TrackPoint idle and moving. Successful compilation does not
+establish physical wireless range or battery runtime.
 
-The lower peripheral latency lets the left half skip fewer idle connection
-events. It increases idle radio use, so measure battery life on the left half;
-no battery-runtime or distance improvement is guaranteed. Larger queues use
-additional RAM and help with short processing stalls, not sustained radio
-outages. Disabling 2 Mbps mode follows the radio-mode change in
-[ZMK's connection-stability option](https://zmk.dev/docs/config/bluetooth),
-without enabling its other experimental changes. See also
-[ZMK's weak-connection guidance](https://zmk.dev/docs/troubleshooting/connection-issues#unreliableweak-connection).
-
-ZMK and the PS/2 driver are pinned to the existing compatible upstream commits;
-this change does not migrate the TrackPoint to a newer ZMK pointing stack.
-The reusable GitHub build workflow is also pinned to support this fork's
-Zephyr 3.5 board model. Newer workflow revisions assume newer board metadata
-and can fail after compilation, before uploading the firmware.
-
-### Flash and compare
-
-1. Download the `firmware` artifact from a successful GitHub Actions build of
-   this revision. Keep a copy of your known-working left and right firmware.
-2. Flash `seahorse_v2_left-nice_nano_v2-zmk.uf2` to the **left** half and
-   `seahorse_v2_right-nice_nano_v2-zmk.uf2` to the **right** half, using each
-   controller's bootloader. Both halves need the update. These filenames are
-   the defaults from the checked-in build matrix.
-3. Start with the existing bonds. A settings reset is not normally needed for
-   radio and queue changes. The `settings_reset` image erases saved settings;
-   use it only if following ZMK's pairing-recovery instructions.
-4. Keep the right half connected to the computer over USB and select USB output
-   if necessary. At a fixed separation, compare left-only typing with the old
-   firmware, then the new firmware. Include quick taps, chords, and held keys
-   followed by releases. Check for missing, repeated, or stuck keys, both while
-   the TrackPoint is idle and while it is moving.
-5. Repeat at increasing distances with the same orientation and surroundings,
-   and check reconnection after briefly blocking the link. Record left-half
-   runtime through a normal charge cycle before judging the battery tradeoff.
-
-Build success confirms firmware compatibility, not physical wireless range.
 If distance-dependent drops remain, compare antenna orientation and clearance
 from batteries, metal mounts, and nearby USB 3 equipment. Radio configuration
 cannot repair an obstructed or damaged antenna. A failure only during TrackPoint
 motion also warrants checking PS/2 interrupt load and wiring interference.
+
+## TRACKPOINT
+red trackpoint
+[Red Track point pinout](Red_Track_Point.png)
