@@ -6,6 +6,14 @@
 
 #include "seahorse_v2.dtsi"
 
+// Required by the mainline-compatible PS/2 UART integration. The hardware
+// TrackPoint still uses uart0 below, with the existing Seahorse pin assignments.
+&zephyr_udc0 {
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};
+
 &default_transform {
 	col-offset = <5>;
 };
