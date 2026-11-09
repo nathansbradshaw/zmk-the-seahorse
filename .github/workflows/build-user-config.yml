@@ -54,6 +54,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install Rust download prerequisites
+        if: contains(matrix.shield, 'nice_view_gem')
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends curl ca-certificates
+
       - name: Install pinned Rust for the right-side display
         if: contains(matrix.shield, 'nice_view_gem')
         uses: dtolnay/rust-toolchain@ccc8c1f930153b792217f06c65a38f23a882993a # 1.85.1
