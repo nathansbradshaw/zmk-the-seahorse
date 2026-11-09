@@ -1,6 +1,9 @@
 //! Allocation-free playback state and streaming LZSS decoder for the C/LVGL widget.
 #![cfg_attr(not(test), no_std)]
 
+mod display_power;
+pub use display_power::seahorse_display_period_ms;
+
 #[repr(C)]
 pub struct Decoder {
     history: [u8; 4096],

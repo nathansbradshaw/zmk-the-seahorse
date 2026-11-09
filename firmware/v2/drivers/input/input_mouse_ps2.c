@@ -1697,6 +1697,8 @@ static int zmk_mouse_ps2_init(const struct device *dev) {
 
     LOG_DBG("Inside zmk_mouse_ps2_init");
     data->dev = dev;
+    /* A byte can arrive as soon as ps2_config enables its callback. */
+    k_work_init_delayable(&data->packet_buffer_timeout, zmk_mouse_ps2_activity_packet_timout);
 
     LOG_DBG("Creating mouse_ps2 init thread.");
     k_thread_create(&data->thread, data->thread_stack,
@@ -1817,8 +1819,6 @@ static void zmk_mouse_ps2_init_thread(int dev_ptr, int unused) {
     } else {
         LOG_DBG("Successfully activated ps2 callback");
     }
-
-    k_work_init_delayable(&data->packet_buffer_timeout, zmk_mouse_ps2_activity_packet_timout);
 
     return;
 }

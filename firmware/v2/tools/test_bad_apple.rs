@@ -1,8 +1,46 @@
 //! Tests of the same Rust decoder/session code that runs on-device.
 //! See ../boards/shields/nice_view_gem/BAD_APPLE.md for the build commands.
-use super::{ba_decode, ba_due_frame, ba_session_power, Decoder, Session};
+use super::{
+    ba_decode, ba_due_frame, ba_session_power, seahorse_display_period_ms, Decoder, Session,
+};
 fn decoder() -> Decoder {
     unsafe { std::mem::zeroed() }
+}
+
+#[test]
+fn usb_idle_keeps_video_running_and_activity_does_not_replay_it() {
+    let mut s = Session::default();
+    unsafe {
+        assert!(ba_session_power(&mut s, true, 1, 0));
+        // A 30-second inactivity transition must not stop a USB-powered clip.
+        assert_eq!(seahorse_display_period_ms(true, false, 10), 10);
+        assert_eq!(ba_due_frame(&s, 30_000, 12), 360);
+        assert_eq!(ba_due_frame(&s, 219_084, 12), 2629);
+        s.finished = true;
+        for active in [true, false, true] {
+            assert_eq!(seahorse_display_period_ms(true, active, 10), 10);
+            assert!(!ba_session_power(&mut s, true, 1, 220_000));
+            assert!(s.finished);
+        }
+    }
+}
+
+#[test]
+fn battery_idle_and_pointer_wake_do_not_start_video() {
+    let mut s = Session::default();
+    unsafe {
+        ba_session_power(&mut s, true, 1, 0);
+        assert!(!ba_session_power(&mut s, false, 1, 10_000));
+        assert_eq!(seahorse_display_period_ms(false, false, 10), 0);
+        // Pointer/key activity restores rendering while USB remains absent.
+        assert_eq!(seahorse_display_period_ms(false, true, 10), 10);
+        assert!(!ba_session_power(&mut s, false, 1, 50_000));
+        assert!(!s.powered);
+        assert_eq!(seahorse_display_period_ms(false, false, 10), 0);
+        // A genuine replug rearms video even if the keyboard remains idle.
+        assert_eq!(seahorse_display_period_ms(true, false, 10), 10);
+        assert!(ba_session_power(&mut s, true, 2, 60_000));
+    }
 }
 fn decode(d: &mut Decoder, data: &[u8], output: &mut [u8]) -> bool {
     unsafe {
