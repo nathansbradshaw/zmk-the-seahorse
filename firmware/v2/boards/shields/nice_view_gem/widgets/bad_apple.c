@@ -26,9 +26,10 @@ static void draw_frame(void) {
         for (int x = 0; x < BAD_APPLE_WIDTH; x++) {
             unsigned int pixel = y * BAD_APPLE_WIDTH + x;
             bool white = frame[pixel / 8] & (0x80 >> (pixel % 8));
-            lv_canvas_set_px_color(video_canvas, x + (BUFFER_SIZE - BAD_APPLE_WIDTH) / 2,
-                                    y + (BUFFER_SIZE - BAD_APPLE_HEIGHT) / 2,
-                                    white ? lv_color_white() : lv_color_black());
+            /* Write the canvas buffer directly; invalidate only once per frame. */
+            video_buffer[(y + (BUFFER_SIZE - BAD_APPLE_HEIGHT) / 2) * BUFFER_SIZE +
+                         x + (BUFFER_SIZE - BAD_APPLE_WIDTH) / 2] =
+                white ? lv_color_white() : lv_color_black();
         }
     }
     rotate_canvas(video_canvas, video_buffer);

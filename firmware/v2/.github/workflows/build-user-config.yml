@@ -64,7 +64,7 @@ jobs:
         if: contains(matrix.shield, 'nice_view_gem')
         uses: dtolnay/rust-toolchain@ccc8c1f930153b792217f06c65a38f23a882993a # 1.85.1
         with:
-          targets: thumbv7em-none-eabi
+          targets: thumbv7em-none-eabi,thumbv7em-none-eabihf
 
       - name: Create build directory
         run: |

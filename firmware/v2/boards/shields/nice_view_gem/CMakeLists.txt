@@ -13,11 +13,16 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_VIEW_WIDGET_STATUS)
   zephyr_library_sources(widgets/bad_apple.c)
   # The LVGL widget stays C; allocation-free playback/decoding is Rust.
   find_program(SEAHORSE_RUSTC rustc REQUIRED)
+  if(CONFIG_FP_HARDABI)
+    set(SEAHORSE_RUST_TARGET thumbv7em-none-eabihf)
+  else()
+    set(SEAHORSE_RUST_TARGET thumbv7em-none-eabi)
+  endif()
   set(SEAHORSE_VIDEO_LIB ${CMAKE_CURRENT_BINARY_DIR}/libseahorse_video.a)
   add_custom_command(
     OUTPUT ${SEAHORSE_VIDEO_LIB}
     COMMAND ${SEAHORSE_RUSTC} --edition=2021 --crate-name seahorse_video
-      --crate-type staticlib --target thumbv7em-none-eabi
+      --crate-type staticlib --target ${SEAHORSE_RUST_TARGET}
       -C panic=abort -C opt-level=z -C embed-bitcode=no
       ${CMAKE_CURRENT_LIST_DIR}/widgets/bad_apple_core.rs -o ${SEAHORSE_VIDEO_LIB}
     DEPENDS ${CMAKE_CURRENT_LIST_DIR}/widgets/bad_apple_core.rs

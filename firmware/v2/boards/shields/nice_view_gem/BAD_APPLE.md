@@ -82,9 +82,10 @@ TrackPoint, display indicators, and Studio while the animation runs.
 ## Firmware toolchain
 
 Firmware CI uses the local copy of the previously pinned ZMK v0.3 build recipe
-and installs Rust 1.85.1 with `thumbv7em-none-eabi` for the right build. The
+and installs Rust 1.85.1 with Cortex-M4 soft/hard-float targets for the right build. The
 root and standalone-profile recipes are identical and checked by CI. On a
 local ZMK development system, install that target with
-`rustup target add thumbv7em-none-eabi`; CMake invokes `rustc` directly to link
+`rustup target add thumbv7em-none-eabi thumbv7em-none-eabihf`; CMake selects
+the target matching Zephyr's `CONFIG_FP_HARDABI` and invokes `rustc` directly to link
 the `no_std` static library. No Cargo dependencies or runtime allocation are
 needed. The existing C widget provides the LVGL drawing/event interface.
