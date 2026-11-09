@@ -19,10 +19,39 @@ The reusable GitHub workflow is pinned to a revision compatible with v0.3's
 Zephyr 3.5 board model. Updating the workflow to current development `main`
 can fail its newer board-metadata check after successfully compiling.
 
-This upgrade establishes a baseline before Bluetooth tuning. The existing
-+8 dBm transmit power is retained. Split latency, queues, and PHY settings
-use the release defaults. Hardware testing is required to establish typing,
-TrackPoint, split-link, and battery behavior.
+The firmware favors split-link reliability, retaining the existing +8 dBm
+transmit power on both halves. Hardware testing is required to establish
+typing, TrackPoint, split-link, and battery behavior.
+
+## Split Bluetooth reliability
+
+The USB-connected right half is the central and owns the TrackPoint. Left-side
+keys still travel over Bluetooth between the halves. If left-side keys drop
+as the halves move apart while the right side continues working, test this
+split link first.
+
+| Setting | Untuned v0.3.0 baseline | Reliability configuration |
+| --- | --- | --- |
+| Transmit power, both halves | +8 dBm | +8 dBm (retained) |
+| 2 Mbps PHY, both halves | Enabled | Disabled; use 1 Mbps |
+| Left outgoing key-state snapshot queue | 10 | 64 |
+| Right incoming key-transition queue | 5 | 64 |
+| Peripheral latency, negotiated by the right half | 30 | 4 |
+| Connection interval / supervision timeout | 7.5 ms / 4 s | 7.5 ms / 4 s (retained) |
+
+Reducing peripheral latency lets the left half skip fewer idle connection
+events: at most four rather than thirty. With a healthy link, that corresponds
+to idle listening every 37.5 ms rather than 232.5 ms. This increases left-half
+idle power consumption; measure actual battery runtime through a normal charge
+cycle. Lower idle latency is not a guarantee of faster active typing or longer
+range. Larger queues use RAM and absorb short processing/notification stalls;
+they do not preserve events through a sustained radio outage or disconnect.
+
+Disabling 2 Mbps mode follows the radio change used by
+[ZMK's connection-stability option](https://zmk.dev/docs/config/bluetooth).
+The direct controller setting applies to both halves without enabling other
+experimental settings. See also
+[ZMK's weak-connection guidance](https://zmk.dev/docs/troubleshooting/connection-issues#unreliableweak-connection).
 
 ## Note:
 This is ZMK for V2, check the releases for v1 releases if you a re using the original Seahorse.
@@ -59,9 +88,16 @@ With the right half connected to the computer over USB, check:
 - Left-half typing at a fixed separation, first while the TrackPoint is idle
   and then while moving it; reconnecting after restarting either half.
 
-Record that baseline before applying Bluetooth-specific configuration changes.
-Successful compilation does not establish physical wireless range or battery
-runtime.
+Compare this firmware against the untuned ZMK v0.3.0 baseline at the same
+separation and orientation. Include quick taps, chords, and held keys followed
+by releases; check for missing, repeated, or stuck keys. Repeat at increasing
+distances with the TrackPoint idle and moving. Successful compilation does not
+establish physical wireless range or battery runtime.
+
+If distance-dependent drops remain, compare antenna orientation and clearance
+from batteries, metal mounts, and nearby USB 3 equipment. Radio configuration
+cannot repair an obstructed or damaged antenna. A failure only during TrackPoint
+motion also warrants checking PS/2 interrupt load and wiring interference.
 
 ## TRACKPOINT
 red trackpoint
