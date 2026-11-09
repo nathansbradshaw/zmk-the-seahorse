@@ -252,13 +252,13 @@ int zmk_mouse_ps2_settings_save();
  * Mouse Activity Packet Reading
  */
 
-void zmk_mouse_ps2_activity_process_cmd(const struct device *dev, 
+void zmk_mouse_ps2_activity_process_cmd(const struct device *dev,
                                         zmk_mouse_ps2_packet_mode packet_mode, uint8_t packet_state,
                                         uint8_t packet_x, uint8_t packet_y, uint8_t packet_extra);
 void zmk_mouse_ps2_activity_abort_cmd(const struct device *dev, char *reason);
 void zmk_mouse_ps2_activity_move_mouse(const struct device *dev, int16_t mov_x, int16_t mov_y);
 void zmk_mouse_ps2_activity_scroll(const struct device *dev, int8_t scroll_y);
-void zmk_mouse_ps2_activity_click_buttons(const struct device *dev, 
+void zmk_mouse_ps2_activity_click_buttons(const struct device *dev,
                                           bool button_l, bool button_m, bool button_r);
 void zmk_mouse_ps2_activity_reset_packet_buffer(const struct device *dev);
 
@@ -326,7 +326,7 @@ void zmk_mouse_ps2_activity_abort_cmd(const struct device *dev, char *reason) {
 // device to resend the packet.
 // The device will resend all bytes of the packet. So we need to reset our
 // buffer.
-void zmk_mouse_ps2_activity_resend_callback(const struct device *dev, 
+void zmk_mouse_ps2_activity_resend_callback(const struct device *dev,
                                             const struct device *ps2_device) {
 
 #if IS_ENABLED(CONFIG_ZMK_INPUT_MOUSE_PS2_ENABLE_PS2_RESEND_CALLBACK)
@@ -518,7 +518,7 @@ void zmk_mouse_ps2_activity_move_mouse(const struct device *dev, int16_t mov_x, 
 
 }
 
-void zmk_mouse_ps2_activity_click_buttons(const struct device *dev, 
+void zmk_mouse_ps2_activity_click_buttons(const struct device *dev,
                                           bool button_l, bool button_m, bool button_r) {
     struct zmk_mouse_ps2_data *data = dev->data;
     const struct zmk_mouse_ps2_config *config = dev->config;
