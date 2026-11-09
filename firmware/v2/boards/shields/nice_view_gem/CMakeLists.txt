@@ -23,8 +23,12 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_VIEW_WIDGET_STATUS)
     DEPENDS ${CMAKE_CURRENT_LIST_DIR}/widgets/bad_apple_core.rs
     VERBATIM)
   add_custom_target(seahorse_video_rust_build DEPENDS ${SEAHORSE_VIDEO_LIB})
-  zephyr_library_import(seahorse_video_rust ${SEAHORSE_VIDEO_LIB})
-  add_dependencies(seahorse_video_rust seahorse_video_rust_build)
+  # Link as an external archive, outside Zephyr's whole-archive list. Pulling
+  # every Rust/compiler-builtins object would conflict with the C runtime.
+  add_library(seahorse_video_rust STATIC IMPORTED GLOBAL)
+  set_target_properties(seahorse_video_rust PROPERTIES IMPORTED_LOCATION ${SEAHORSE_VIDEO_LIB})
+  add_dependencies(app seahorse_video_rust_build)
+  zephyr_link_libraries(seahorse_video_rust)
   zephyr_library_sources(widgets/wpm.c)
   else()
     zephyr_library_sources(assets/crystal.c)
